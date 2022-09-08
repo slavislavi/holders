@@ -3,10 +3,10 @@ import {Home} from '../scenes/Home';
 import {Edit} from '../scenes/Edit';
 import {Map} from '../scenes/Map';
 import {About} from '../scenes/About';
-import {createStackNavigator} from '@react-navigation/stack';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
 
-const Stack = createStackNavigator<StackProps>();
+const Stack = createNativeStackNavigator<StackProps>();
 
 export type StackProps = {
   Home: {title: string} | undefined;
