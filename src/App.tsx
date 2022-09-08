@@ -1,5 +1,5 @@
 import React, {FC, useLayoutEffect, useState} from 'react';
-import {ActivityIndicator} from 'react-native';
+import {ActivityIndicator, SafeAreaView, StatusBar} from 'react-native';
 
 import AppNavigation from '@router/index';
 
@@ -11,9 +11,10 @@ export const App: FC = () => {
   }, []);
 
   return (
-    <>
+    <SafeAreaView>
+      <StatusBar />
       <AppNavigation />
       {isLoading && <ActivityIndicator size="large" color="#000075" />}
-    </>
+    </SafeAreaView>
   );
 };
