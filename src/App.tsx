@@ -1,12 +1,18 @@
-import React from 'react';
-import {SafeAreaView, Text, View} from 'react-native';
+import React, {FC, useLayoutEffect, useState} from 'react';
+import {ActivityIndicator} from 'react-native';
+import AppNavigation from './router';
 
-export const App = () => {
+export const App: FC = () => {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useLayoutEffect(() => {
+    setIsLoading(false);
+  }, []);
+
   return (
-    <SafeAreaView>
-      <View>
-        <Text>CIS Holder</Text>
-      </View>
-    </SafeAreaView>
+    <>
+      <AppNavigation />
+      {isLoading && <ActivityIndicator size="large" color="#000075" />}
+    </>
   );
 };
