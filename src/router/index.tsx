@@ -3,9 +3,9 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import {Home} from '@scenes/Home';
+import {About} from '@scenes/About';
 import {Edit} from '@scenes/Edit';
 import {Map} from '@scenes/Map';
-import {About} from '@scenes/About';
 
 const Stack = createNativeStackNavigator<StackProps>();
 
