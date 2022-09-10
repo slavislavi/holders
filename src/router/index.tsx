@@ -1,55 +1,38 @@
-import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import React, {FC} from 'react';
+import {createDrawerNavigator} from '@react-navigation/drawer';
+import {
+  getFocusedRouteNameFromRoute,
+  NavigationContainer,
+} from '@react-navigation/native';
 
-import {Home} from '@scenes/Home';
-import {About} from '@scenes/About';
-import {Edit} from '@scenes/Edit';
-import {Map} from '@scenes/Map';
+import {HomeTabs} from './HomeTabs';
+import {DrawerStack} from './DrawerStack';
+import {BackButton} from '@components/BackButton';
+import {CustomDrawer} from '@components/CustomDrawer';
+import {RootDrawerProps} from './types';
 
-const Stack = createNativeStackNavigator<StackProps>();
+const RootDrawer = createDrawerNavigator<RootDrawerProps>();
 
-export type StackProps = {
-  Home: {title: string} | undefined;
-  Edit: {title: string} | undefined;
-  Map: {title: string} | undefined;
-  About: {title: string} | undefined;
-};
-
-export default function AppNavigation() {
-  const {Navigator, Screen} = Stack;
+export const AppNavigation: FC = () => {
+  const {Navigator, Screen} = RootDrawer;
 
   return (
     <NavigationContainer>
       <Navigator
-        initialRouteName="Home"
-        screenOptions={{
-          headerStyle: {
-            backgroundColor: 'dimgrey',
-          },
-          headerTintColor: 'grey',
-          headerTitleStyle: {
-            fontFamily: 'roboto',
-            fontWeight: '400',
-          },
-        }}>
+        drawerContent={props => <CustomDrawer {...props} />}
+        screenOptions={({route}) => ({
+          headerTitleAlign: 'center',
+          headerTitle: getFocusedRouteNameFromRoute(route),
+        })}>
+        <Screen name='Home' component={HomeTabs} />
         <Screen
-          name="Home"
-          component={Home}
-          options={{title: 'KNOWN OBJECTS'}}
+          name='DrawerStack'
+          component={DrawerStack}
+          options={{
+            headerLeft: BackButton,
+          }}
         />
-        <Screen
-          name="Edit"
-          component={Edit}
-          options={{title: 'ADD NEW OBJECT'}}
-        />
-        <Screen
-          name="Map"
-          component={Map}
-          options={{title: 'OBJECTS ON MAP'}}
-        />
-        <Screen name="About" component={About} options={{title: 'ABOUT APP'}} />
       </Navigator>
     </NavigationContainer>
   );
-}
+};
