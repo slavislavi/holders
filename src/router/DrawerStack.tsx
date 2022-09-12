@@ -9,7 +9,7 @@ export const DrawerStack: FC = () => {
 
   return (
     <Navigator screenOptions={{headerShown: false}}>
-      <Screen name='About' component={About} options={{title: 'ABOUT APP'}} />
+      <Screen name='ABOUT APP' component={About} />
     </Navigator>
   );
 };
