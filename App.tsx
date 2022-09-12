@@ -1,7 +1,7 @@
-import React, {FC} from 'react';
+import React from 'react';
 
 import {AppNavigation} from '@router/index';
 
-export const App: FC = () => {
+export const App = () => {
   return <AppNavigation />;
 };

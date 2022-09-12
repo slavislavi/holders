@@ -11,7 +11,7 @@ export type DrawerStackProps = {
 };
 
 export type HomeTabProps = {
-  Home: {title: string} | undefined;
+  Services: {title: string} | undefined;
   Edit: {title: string} | undefined;
   Map: {title: string} | undefined;
 };
