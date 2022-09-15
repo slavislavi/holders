@@ -2,6 +2,9 @@ import React, {useState, useRef} from 'react';
 import {FlatList, View, Animated} from 'react-native';
 
 import {SliderItem} from './SliderItem';
+import {Paginator} from './Paginator';
+import {NextButton} from './NextButton';
+
 import slides from './data';
 import {styles} from './styles';
 
@@ -16,12 +19,20 @@ export const Slider = () => {
 
   const viewConfig = useRef({viewAreaCoveragePercentThreshold: 50}).current;
 
+  const scrollTo = () => {
+    if (currentIndex < slides.length - 1) {
+      slidesRef.current.scrollToIndex({index: currentIndex + 1});
+    } else {
+      console.log('Last item');
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.innerContainer}>
         <FlatList
           horizontal
-          showsHorizontalScrollIndicator
+          showsHorizontalScrollIndicator={false}
           pagingEnabled
           bounces={false}
           keyExtractor={item => item.id}
@@ -37,6 +48,11 @@ export const Slider = () => {
           ref={slidesRef}
         />
       </View>
+      <Paginator data={slides} scrollX={scrollX} />
+      <NextButton
+        scrollTo={scrollTo}
+        percentage={(currentIndex + 1) * (100 / slides.length)}
+      />
     </View>
   );
 };

@@ -1,6 +1,6 @@
 export const THEME = {
   PRIMARY: '#2f2f2f',
-  PRIMARY_HOVER: '#2f2f2f75',
+  PRIMARY_HOVER: '#2f2f2f80',
   SECONDARY: '#efeeef',
   SECONDARY_HOVER: '#bdcccd',
   DANGER: '#cc3500',
@@ -11,4 +11,5 @@ export const THEME = {
   ABOUT_BG: '#9ce6ff',
   MAP_BG: '#f6ca77',
   BORDER: '#4896fa',
+  PAGINATOR_DOT: '#027b96',
 };
