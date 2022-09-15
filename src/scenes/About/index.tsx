@@ -1,11 +1,13 @@
 import React, {FC} from 'react';
-import {View, Text} from 'react-native';
+import {View} from 'react-native';
+
+import {Slider} from '@components/Slider';
 import {styles} from './styles';
 
 export const About: FC = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>слайдер</Text>
+      <Slider />
     </View>
   );
 };

@@ -4,7 +4,6 @@ import {THEME} from '@styles/theme';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: THEME.ABOUT_BG,
     justifyContent: 'center',
     alignItems: 'center',
   },
