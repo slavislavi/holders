@@ -13,7 +13,7 @@ export const CustomDrawer: FC<DrawerContentComponentProps> = props => {
   return (
     <DrawerContentScrollView {...props}>
       <DrawerItem
-        label='About'
+        label='ABOUT APP'
         focused={
           drawerStackState &&
           drawerStackState.routes[
@@ -21,7 +21,7 @@ export const CustomDrawer: FC<DrawerContentComponentProps> = props => {
           ].name === 'About'
         }
         onPress={() =>
-          props.navigation.navigate('DrawerStack', {screen: 'About'})
+          props.navigation.navigate('DrawerStack', {screen: 'ABOUT APP'})
         }
       />
     </DrawerContentScrollView>
