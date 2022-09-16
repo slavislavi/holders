@@ -1,8 +1,10 @@
 import React, {FC} from 'react';
 import {View, Animated, useWindowDimensions} from 'react-native';
-import {styles} from './styles';
 
-export const Paginator: FC = ({data, scrollX}) => {
+import {PaginatorProps} from '@components/Slider/types';
+import {styles} from '@components/Slider/styles';
+
+export const Paginator: FC<PaginatorProps> = ({data, scrollX}) => {
   const {width} = useWindowDimensions();
 
   return (

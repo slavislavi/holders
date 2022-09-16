@@ -12,4 +12,5 @@ export const THEME = {
   MAP_BG: '#f6ca77',
   BORDER: '#4896fa',
   PAGINATOR_DOT: '#027b96',
+  INACTIVE: '#027b9640',
 };

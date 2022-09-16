@@ -1,5 +1,5 @@
-import {THEME} from '@styles/theme';
 import {StyleSheet} from 'react-native';
+import {THEME} from '@styles/theme';
 
 export const styles = StyleSheet.create({
   container: {
@@ -41,16 +41,18 @@ export const styles = StyleSheet.create({
     borderRadius: 5,
     backgroundColor: THEME.PAGINATOR_DOT,
     marginHorizontal: 8,
+    marginTop: 10,
   },
   skipButton: {
     position: 'absolute',
-    backgroundColor: THEME.DANGER,
+    backgroundColor: THEME.PAGINATOR_DOT,
     borderRadius: 100,
-    padding: 20,
+    padding: 30,
   },
   skipText: {
-    fontSize: 32,
-    lineHeight: 32,
+    fontSize: 36,
+    fontWeight: '800',
+    lineHeight: 36,
     color: THEME.SECONDARY,
   },
 });

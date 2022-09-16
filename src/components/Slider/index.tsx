@@ -1,17 +1,18 @@
 import React, {useState, useRef} from 'react';
-import {FlatList, View, Animated} from 'react-native';
+import {FlatList, View, Animated, ListRenderItem} from 'react-native';
 
-import {SliderItem} from './SliderItem';
-import {Paginator} from './Paginator';
-import {NextButton} from './NextButton';
+import {SliderItem} from '@components/Slider/components/SliderItem';
+import {Paginator} from '@components/Slider/components/Paginator';
+import {NextButton} from '@components/Slider/components/NextButton';
 
-import slides from './data';
-import {styles} from './styles';
+import {slides} from '@components/Slider/data';
+import {styles} from '@components/Slider/styles';
+import {SliderItemType} from '@components/Slider/types';
 
 export const Slider = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const scrollX = useRef(new Animated.Value(0)).current;
-  const slidesRef = useRef(null);
+  const slidesRef = useRef<FlatList>(null);
 
   const viewableItemsChanged = useRef(({viewableItems}: any) =>
     setCurrentIndex(viewableItems[0].index),
@@ -19,11 +20,15 @@ export const Slider = () => {
 
   const viewConfig = useRef({viewAreaCoveragePercentThreshold: 50}).current;
 
+  const renderItem: ListRenderItem<SliderItemType> = ({item}) => (
+    <SliderItem item={item} />
+  );
+
   const scrollTo = () => {
     if (currentIndex < slides.length - 1) {
-      slidesRef.current.scrollToIndex({index: currentIndex + 1});
+      slidesRef.current?.scrollToIndex({index: currentIndex + 1});
     } else {
-      console.log('Last item');
+      slidesRef.current?.scrollToIndex({index: 0});
     }
   };
 
@@ -37,7 +42,7 @@ export const Slider = () => {
           bounces={false}
           keyExtractor={item => item.id}
           data={slides}
-          renderItem={({item}) => <SliderItem item={item} />}
+          renderItem={renderItem}
           onScroll={Animated.event(
             [{nativeEvent: {contentOffset: {x: scrollX}}}],
             {useNativeDriver: false},

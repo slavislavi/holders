@@ -2,20 +2,21 @@ import React, {FC, useEffect, useRef} from 'react';
 import {Text, View, TouchableOpacity, Animated, Platform} from 'react-native';
 import Svg, {G, Circle} from 'react-native-svg';
 
+import {NextButtonProps} from '@components/Slider/types';
+import {styles} from '@components/Slider/styles';
 import {THEME} from '@styles/theme';
-import {styles} from './styles';
 
-export const NextButton: FC = ({percentage, scrollTo}) => {
-  const SIZE = 128;
-  const STROKE_WIDTH = 2;
+export const NextButton: FC<NextButtonProps> = ({percentage, scrollTo}) => {
+  const SIZE = 112;
+  const STROKE_WIDTH = 4;
   const CENTER = SIZE / 2;
   const RADIUS = SIZE / 2 - STROKE_WIDTH / 2;
   const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
 
   const progressAnimation = useRef(new Animated.Value(0)).current;
-  const progressRef = useRef(null);
+  const progressRef = useRef<Circle>(null);
 
-  const animation = toValue => {
+  const animation = (toValue: number) => {
     return Animated.timing(progressAnimation, {
       toValue,
       duration: 250,
@@ -28,19 +29,15 @@ export const NextButton: FC = ({percentage, scrollTo}) => {
   }, [percentage]);
 
   useEffect(() => {
-    progressAnimation.addListener(
-      value => {
-        const strokeDashOffset =
-          CIRCUMFERENCE - (CIRCUMFERENCE * value.value) / 100;
+    progressAnimation.addListener(value => {
+      const strokeDashoffset = CIRCUMFERENCE - (CIRCUMFERENCE * value.value) / 100;
 
-        if (progressRef?.current) {
-          progressRef.current.setNativeProps({
-            strokeDashOffset,
-          });
-        }
-      },
-      [percentage],
-    );
+      if (progressRef?.current) {
+        progressRef.current.setNativeProps({
+          strokeDashoffset,
+        });
+      }
+    });
 
     return () => {
       progressAnimation.removeAllListeners();
@@ -52,7 +49,7 @@ export const NextButton: FC = ({percentage, scrollTo}) => {
       <Svg width={SIZE} height={SIZE}>
         <G rotation='-90' origin={CENTER}>
           <Circle
-            stroke={THEME.PRIMARY_HOVER}
+            stroke={THEME.INACTIVE}
             cx={CENTER}
             cy={CENTER}
             r={RADIUS}
@@ -60,7 +57,7 @@ export const NextButton: FC = ({percentage, scrollTo}) => {
           />
           <Circle
             ref={progressRef}
-            stroke={THEME.DANGER}
+            stroke={THEME.PAGINATOR_DOT}
             cx={CENTER}
             cy={CENTER}
             r={RADIUS}

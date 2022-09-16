@@ -8,6 +8,7 @@ module.exports = {
       files: ['*.ts', '*.tsx'],
       rules: {
         '@typescript-eslint/no-shadow': ['error'],
+        '@typescript-eslint/switch-exhaustiveness-check': ['warn'],
         'prettier/prettier': ['error', {singleQuote: true}],
         'jsx-quotes': [2, 'prefer-single'],
         'no-shadow': 'off',

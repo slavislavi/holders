@@ -1,9 +1,10 @@
 import React, {FC} from 'react';
 import {Text, View, Image, useWindowDimensions} from 'react-native';
-import {SliderItemType} from './types';
-import {styles} from './styles';
 
-export const SliderItem: FC<SliderItemType> = ({
+import {SliderItemProps} from '@components/Slider/types';
+import {styles} from '@components/Slider/styles';
+
+export const SliderItem: FC<SliderItemProps> = ({
   item: {image, title, description},
 }) => {
   const {width} = useWindowDimensions();
@@ -12,7 +13,7 @@ export const SliderItem: FC<SliderItemType> = ({
     <View style={[styles.container, {width}]}>
       <Image
         source={image}
-        style={[styles.image, {width}]}
+        style={[styles.image, {width: width * 0.8}]}
         resizeMode='contain'
       />
       <View style={styles.textWrapper}>

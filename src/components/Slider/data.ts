@@ -1,6 +1,7 @@
+import {SliderItemType} from '@components/Slider/types';
 import {SliderClips} from '@assets/images';
 
-export default [
+export const slides: SliderItemType[] = [
   {
     id: '1',
     title: 'For trips abroad',
