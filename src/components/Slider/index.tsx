@@ -1,5 +1,6 @@
 import React, {useState, useRef} from 'react';
 import {FlatList, View, Animated, ListRenderItem} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 
 import {SliderItem} from '@components/Slider/components/SliderItem';
 import {Paginator} from '@components/Slider/components/Paginator';
@@ -13,6 +14,8 @@ export const Slider = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const scrollX = useRef(new Animated.Value(0)).current;
   const slidesRef = useRef<FlatList>(null);
+
+  const navigation = useNavigation();
 
   const viewableItemsChanged = useRef(({viewableItems}: any) =>
     setCurrentIndex(viewableItems[0].index),
@@ -28,7 +31,7 @@ export const Slider = () => {
     if (currentIndex < slides.length - 1) {
       slidesRef.current?.scrollToIndex({index: currentIndex + 1});
     } else {
-      slidesRef.current?.scrollToIndex({index: 0});
+      navigation.navigate('Home', {screen: 'Services'});
     }
   };
 

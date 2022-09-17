@@ -9,7 +9,7 @@ export const THEME = {
   HOME_BG: '#fad9e6',
   EDIT_BG: '#b6ffce',
   ABOUT_BG: '#9ce6ff',
-  MAP_BG: '#f6ca77',
+  MAP_BG: '#f0f0f0',
   BORDER: '#4896fa',
   PAGINATOR_DOT: '#027b96',
   INACTIVE: '#027b9640',

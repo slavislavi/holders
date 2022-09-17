@@ -14,6 +14,7 @@ export const styles = StyleSheet.create({
   image: {
     flex: 0.7,
     justifyContent: 'center',
+    marginTop: 16,
   },
   textWrapper: {
     flex: 0.3,
@@ -22,6 +23,7 @@ export const styles = StyleSheet.create({
     fontWeight: '800',
     fontSize: 28,
     marginBottom: 10,
+    marginTop: 10,
     textAlign: 'center',
     color: THEME.PRIMARY,
   },
@@ -29,12 +31,13 @@ export const styles = StyleSheet.create({
     fontWeight: '400',
     fontSize: 18,
     textAlign: 'center',
-    paddingHorizontal: 64,
+    paddingHorizontal: 54,
     color: THEME.PRIMARY_HOVER,
   },
   paginatorWrapper: {
     flexDirection: 'row',
-    height: 64,
+    height: 44,
+    marginTop: 10,
   },
   dot: {
     height: 10,

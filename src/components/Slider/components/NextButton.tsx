@@ -14,7 +14,7 @@ export const NextButton: FC<NextButtonProps> = ({percentage, scrollTo}) => {
   const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
 
   const progressAnimation = useRef(new Animated.Value(0)).current;
-  const progressRef = useRef<Circle>(null);
+  const progressRef = useRef<any>(null);
 
   const animation = (toValue: number) => {
     return Animated.timing(progressAnimation, {
