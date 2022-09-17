@@ -30,7 +30,8 @@ export const NextButton: FC<NextButtonProps> = ({percentage, scrollTo}) => {
 
   useEffect(() => {
     progressAnimation.addListener(value => {
-      const strokeDashoffset = CIRCUMFERENCE - (CIRCUMFERENCE * value.value) / 100;
+      const strokeDashoffset =
+        CIRCUMFERENCE - (CIRCUMFERENCE * value.value) / 100;
 
       if (progressRef?.current) {
         progressRef.current.setNativeProps({
