@@ -4,7 +4,7 @@ import {THEME} from '@styles/theme';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: THEME.HOME_BG,
+    backgroundColor: THEME.APP_BG,
   },
   item: {
     fontSize: 24,

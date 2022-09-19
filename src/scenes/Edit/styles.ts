@@ -4,7 +4,7 @@ import {THEME} from '@styles/theme';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: THEME.EDIT_BG,
+    backgroundColor: THEME.APP_BG,
     justifyContent: 'center',
     alignItems: 'center',
   },

@@ -5,6 +5,7 @@ import {Edit} from '@scenes/Edit';
 import {Map} from '@scenes/Map';
 import {Services} from '@scenes/Services';
 import {AppIcons} from '@assets/images';
+import {styles} from '@router/styles';
 
 const Tab = createBottomTabNavigator();
 
@@ -16,6 +17,10 @@ export const HomeTabs = () => {
       initialRouteName='Services'
       screenOptions={{
         headerShown: false,
+        tabBarStyle: styles.tabContainer,
+        tabBarLabelStyle: styles.tabLabel,
+        tabBarActiveTintColor: styles.tabLabelActive.color,
+        tabBarInactiveTintColor: styles.tabLabelInactive.color,
       }}>
       <Screen
         name='MY SERVICES'
