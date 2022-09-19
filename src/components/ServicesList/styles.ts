@@ -4,6 +4,7 @@ import {THEME} from '@styles/theme';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: THEME.HOME_BG,
   },
   item: {
     fontSize: 24,
@@ -12,8 +13,7 @@ export const styles = StyleSheet.create({
   },
   sectionHeader: {
     padding: 10,
-    fontSize: 24,
-    fontWeight: '800',
+    fontSize: 32,
     color: THEME.SECONDARY,
     backgroundColor: THEME.PAGINATOR_DOT,
   },

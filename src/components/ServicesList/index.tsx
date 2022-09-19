@@ -9,6 +9,7 @@ import {
   SectionCategoryType,
   SectionItemType,
 } from '@components/ServicesList/types';
+import {CustomText} from '@components/CustomText';
 import {SERVICES_DATA} from '@components/ServicesList/data';
 import {styles} from '@components/ServicesList/styles';
 
@@ -21,7 +22,9 @@ export const ServicesList: FC = () => {
   };
 
   const renderHeader = ({section}: {section: SectionCategoryType}) => {
-    return <Text style={styles.sectionHeader}>{section.title}</Text>;
+    return (
+      <CustomText style={styles.sectionHeader}>{section.title}</CustomText>
+    );
   };
 
   return (

@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {Button, View} from 'react-native';
+import {Text, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {styles} from './styles';
 
@@ -8,8 +8,8 @@ export const BackButton: FC = () => {
   const handleBackStep = () => navigation.goBack();
 
   return (
-    <View style={styles.buttonContainer}>
-      <Button title='Back' onPress={handleBackStep} />
-    </View>
+    <TouchableOpacity style={styles.buttonContainer} onPress={handleBackStep}>
+      <Text style={styles.buttonText}>Back</Text>
+    </TouchableOpacity>
   );
 };
