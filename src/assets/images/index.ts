@@ -13,6 +13,12 @@ import SliderBarber from './pic06barber.png';
 import SliderMap from './pic07map.png';
 import SliderThanks from './pic08thanks.png';
 
+import NameIcon from './name-input.svg';
+import TypeIcon from './type-input.svg';
+import AddressICon from './address-input.svg';
+import DescriptionIcon from './desc-input.svg';
+import FileIcon from './file-input.svg';
+
 export const AppIcons = {
   MapFilled,
   MapOutlined,
@@ -30,4 +36,12 @@ export const SliderClips = {
   SliderBarber,
   SliderMap,
   SliderThanks,
+};
+
+export const InputIcons = {
+  NameIcon,
+  TypeIcon,
+  AddressICon,
+  DescriptionIcon,
+  FileIcon,
 };
