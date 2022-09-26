@@ -6,6 +6,7 @@ export const THEME = {
   APP_BG: '#9ce6ff',
 
   DANGER: '#cc3500',
+  DANGER_HOVER: '#cc350040',
   SUCCESS: '#00cc00',
   INFO: '#0000ac',
 

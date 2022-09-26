@@ -14,4 +14,6 @@ export enum TextValues {
   ServicesTitle = 'MY SERVICES',
   MapTitle = 'SERVICES ON MAP',
   AddNewTitle = 'ADD NEW SERVICE',
+
+  MarkOnMapSwitcher = 'Mark on map',
 }
