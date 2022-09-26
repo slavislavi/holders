@@ -6,6 +6,7 @@ import {Map} from '@scenes/Map';
 import {Services} from '@scenes/Services';
 import {AppIcons} from '@assets/images';
 import {styles} from '@router/styles';
+import {TextValues} from '@constants/TextValues';
 
 const Tab = createBottomTabNavigator();
 
@@ -23,7 +24,7 @@ export const HomeTabs = () => {
         tabBarInactiveTintColor: styles.tabLabelInactive.color,
       }}>
       <Screen
-        name='MY SERVICES'
+        name={TextValues.ServicesTitle}
         component={Services}
         options={{
           tabBarIcon({focused}) {
@@ -36,7 +37,7 @@ export const HomeTabs = () => {
         }}
       />
       <Screen
-        name='ADD NEW SERVICE'
+        name={TextValues.AddNewTitle}
         component={Edit}
         options={{
           tabBarIcon({focused}) {
@@ -49,7 +50,7 @@ export const HomeTabs = () => {
         }}
       />
       <Screen
-        name='SERVICES ON MAP'
+        name={TextValues.MapTitle}
         component={Map}
         options={{
           tabBarIcon({focused}) {

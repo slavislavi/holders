@@ -1,6 +1,7 @@
 import React, {FC} from 'react';
 import {Text, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import {TextValues} from '@constants/TextValues';
 import {styles} from './styles';
 
 export const BackButton: FC = () => {
@@ -9,7 +10,7 @@ export const BackButton: FC = () => {
 
   return (
     <TouchableOpacity style={styles.buttonContainer} onPress={handleBackStep}>
-      <Text style={styles.buttonText}>Back</Text>
+      <Text style={styles.buttonText}>{TextValues.BackButtonText}</Text>
     </TouchableOpacity>
   );
 };

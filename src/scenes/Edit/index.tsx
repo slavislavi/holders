@@ -2,23 +2,26 @@ import React, {FC} from 'react';
 import {ScrollView, TextInput, TouchableOpacity} from 'react-native';
 import {useForm, Controller} from 'react-hook-form';
 import {CustomText} from '@components/CustomText';
+import {TextValues} from '@constants/TextValues';
 import {styles} from './styles';
 
 export const Edit: FC = () => {
   const {control, handleSubmit} = useForm();
+
+  const onSubmit = () => console.log('submitted');
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <CustomText style={styles.inputTitle}>fill the forms</CustomText>
+      <CustomText style={styles.inputTitle}>{TextValues.FormTitle}</CustomText>
 
       <Controller
         control={control}
         name='name'
         render={({field: {value, onChange}}) => (
           <TextInput
-            placeholder='Name'
+            placeholder={TextValues.NamePlaceholder}
             value={value}
             onChangeText={onChange}
-            // inlineImageLeft='search_icon'
           />
         )}
       />
@@ -28,10 +31,9 @@ export const Edit: FC = () => {
         name='type'
         render={({field: {value, onChange}}) => (
           <TextInput
-            placeholder='Type'
+            placeholder={TextValues.TypePlaceholder}
             value={value}
             onChangeText={onChange}
-            // inlineImageLeft='search_icon'
           />
         )}
       />
@@ -41,10 +43,9 @@ export const Edit: FC = () => {
         name='address'
         render={({field: {value, onChange}}) => (
           <TextInput
-            placeholder='Address'
+            placeholder={TextValues.AddressPlaceholder}
             value={value}
             onChangeText={onChange}
-            // inlineImageLeft='search_icon'
           />
         )}
       />
@@ -55,17 +56,20 @@ export const Edit: FC = () => {
         render={({field: {value, onChange}}) => (
           <TextInput
             multiline
-            placeholder='Description'
+            placeholder={TextValues.DescPlaceholder}
             value={value}
             onChangeText={onChange}
-            // inlineImageLeft='search_icon'
           />
         )}
       />
-      <TextInput placeholder='File' />
+      <TextInput placeholder={TextValues.FilePlaceholder} />
 
-      <TouchableOpacity style={styles.submitButton}>
-        <CustomText style={styles.submitButtonText}>add new</CustomText>
+      <TouchableOpacity
+        style={styles.submitButton}
+        onPress={handleSubmit(onSubmit)}>
+        <CustomText style={styles.submitButtonText}>
+          {TextValues.AddButtonText}
+        </CustomText>
       </TouchableOpacity>
     </ScrollView>
   );

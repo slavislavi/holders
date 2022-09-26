@@ -4,6 +4,7 @@ import {
   DrawerContentScrollView,
   DrawerItem,
 } from '@react-navigation/drawer';
+import {TextValues} from '@constants/TextValues';
 import {styles} from './styles';
 
 export const CustomDrawer: FC<DrawerContentComponentProps> = props => {
@@ -14,7 +15,7 @@ export const CustomDrawer: FC<DrawerContentComponentProps> = props => {
   return (
     <DrawerContentScrollView {...props} style={styles.container}>
       <DrawerItem
-        label='ABOUT APP'
+        label={TextValues.AboutAppTitle}
         labelStyle={styles.label}
         focused={
           drawerStackState &&
@@ -24,7 +25,9 @@ export const CustomDrawer: FC<DrawerContentComponentProps> = props => {
         }
         style={styles.drawerItem}
         onPress={() =>
-          props.navigation.navigate('DrawerStack', {screen: 'ABOUT APP'})
+          props.navigation.navigate('DrawerStack', {
+            screen: TextValues.AboutAppTitle,
+          })
         }
       />
     </DrawerContentScrollView>

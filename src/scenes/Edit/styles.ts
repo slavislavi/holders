@@ -6,13 +6,13 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: THEME.APP_BG,
     alignItems: 'center',
+    justifyContent: 'space-evenly',
   },
   inputTitle: {
     fontSize: 36,
     textTransform: 'uppercase',
     color: THEME.PRIMARY,
     paddingHorizontal: 25,
-    paddingVertical: 5,
   },
   submitButton: {
     backgroundColor: THEME.DANGER,

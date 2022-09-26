@@ -1,6 +1,7 @@
 import React, {FC} from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {About} from '@scenes/About';
+import {TextValues} from '@constants/TextValues';
 
 const Stack = createStackNavigator();
 
@@ -9,7 +10,7 @@ export const DrawerStack: FC = () => {
 
   return (
     <Navigator screenOptions={{headerShown: false}}>
-      <Screen name='ABOUT APP' component={About} />
+      <Screen name={TextValues.AboutAppTitle} component={About} />
     </Navigator>
   );
 };

@@ -2,6 +2,7 @@ import React, {FC, useEffect, useRef} from 'react';
 import {Text, View, TouchableOpacity, Animated, Platform} from 'react-native';
 import Svg, {G, Circle} from 'react-native-svg';
 
+import {TextValues} from '@constants/TextValues';
 import {NextButtonProps} from '@components/Slider/types';
 import {styles} from '@components/Slider/styles';
 import {THEME} from '@styles/theme';
@@ -71,7 +72,7 @@ export const NextButton: FC<NextButtonProps> = ({percentage, scrollTo}) => {
         onPress={scrollTo}
         style={styles.skipButton}
         activeOpacity={0.6}>
-        <Text style={styles.skipText}>→</Text>
+        <Text style={styles.skipText}>{TextValues.ArrowRight}</Text>
       </TouchableOpacity>
     </View>
   );
