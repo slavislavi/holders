@@ -142,7 +142,7 @@ export const Edit: FC = () => {
             <Text style={styles.removePhotoText}>{TextValues.RemovePhoto}</Text>
           </TouchableOpacity>
           <Image
-            style={{width: 175, height: 175}}
+            style={styles.userImage}
             source={{
               uri: image?.assets[0].uri,
             }}

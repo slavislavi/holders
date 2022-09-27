@@ -64,4 +64,8 @@ export const styles = StyleSheet.create({
     fontWeight: '700',
     color: THEME.DANGER,
   },
+  userImage: {
+    width: 148,
+    height: 148,
+  },
 });
