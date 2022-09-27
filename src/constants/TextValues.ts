@@ -16,4 +16,6 @@ export enum TextValues {
   AddNewTitle = 'ADD NEW SERVICE',
 
   MarkOnMapSwitcher = 'Mark on map',
+  AddPhoto = 'Add Photo',
+  RemovePhoto = '☒',
 }

@@ -14,7 +14,6 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		7699B88040F8A987B510C191 /* libPods-holders-holdersTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-holders-holdersTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		1FCE6BF6FA8E4C37A42F040D /* CabinSketchBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 667E2459EB2E423DABE2B1CD /* CabinSketchBold.ttf */; };
 		AFC76555A3DE440B9B18D3B3 /* CabinSketchRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9FB2CF452BAD409994B2DC6B /* CabinSketchRegular.ttf */; };
 /* End PBXBuildFile section */
 
@@ -46,7 +45,6 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = holders/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-holders-holdersTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-holders-holdersTests.release.xcconfig"; path = "Target Support Files/Pods-holders-holdersTests/Pods-holders-holdersTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		667E2459EB2E423DABE2B1CD /* CabinSketchBold.ttf */ = {isa = PBXFileReference; name = "CabinSketchBold.ttf"; path = "../src/assets/fonts/CabinSketchBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		9FB2CF452BAD409994B2DC6B /* CabinSketchRegular.ttf */ = {isa = PBXFileReference; name = "CabinSketchRegular.ttf"; path = "../src/assets/fonts/CabinSketchRegular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
@@ -156,7 +154,6 @@
 		FF27869CE5BD4B89A0D6C4D5 /* Resources */ = {
 			isa = "PBXGroup";
 			children = (
-				667E2459EB2E423DABE2B1CD /* CabinSketchBold.ttf */,
 				9FB2CF452BAD409994B2DC6B /* CabinSketchRegular.ttf */,
 			);
 			name = Resources;
@@ -259,7 +256,6 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				1FCE6BF6FA8E4C37A42F040D /* CabinSketchBold.ttf in Resources */,
 				AFC76555A3DE440B9B18D3B3 /* CabinSketchRegular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

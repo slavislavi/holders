@@ -1,5 +1,6 @@
 import React, {FC, useState} from 'react';
 import {
+  Image,
   ScrollView,
   Switch,
   Text,
@@ -7,7 +8,11 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {useForm, Controller} from 'react-hook-form';
+import {useForm, Controller, FieldValues} from 'react-hook-form';
+import {
+  ImagePickerResponse,
+  launchImageLibrary,
+} from 'react-native-image-picker';
 import {CustomText} from '@components/CustomText';
 import {TextValues} from '@constants/TextValues';
 import {AppIcons} from '@assets/images';
@@ -15,12 +20,44 @@ import {THEME} from '@styles/theme';
 import {styles} from './styles';
 
 export const Edit: FC = () => {
-  const {control, handleSubmit} = useForm();
   const [markOnMapSwitcher, setMarkOnMapSwitcher] = useState(false);
+  const [image, setImage] = useState<ImagePickerResponse | null>(null);
+
+  const {control, handleSubmit} = useForm();
 
   const toggleSwitch = () => setMarkOnMapSwitcher(mark => !mark);
 
-  const onSubmit = () => console.log('submitted');
+  const handlePhotoFromGallery = () => {
+    launchImageLibrary(
+      {
+        mediaType: 'photo',
+        includeBase64: true,
+      },
+      response => {
+        console.log('image: ', response);
+        setImage(response);
+      },
+    );
+  };
+
+  const onSubmit = (data: FieldValues) => {
+    const newService = {
+      name: data.name,
+      type: data.type,
+      address: data.address,
+      description: data.description,
+      timestamp: new Date().toISOString(),
+    };
+
+    let newImage = '';
+
+    if (image?.assets) {
+      newImage = image.assets[0].base64 || '';
+    }
+
+    console.log(JSON.stringify(newImage));
+    console.log(JSON.stringify(newService));
+  };
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -96,7 +133,26 @@ export const Edit: FC = () => {
           />
         )}
       />
-      <TextInput placeholder={TextValues.FilePlaceholder} />
+
+      {image?.assets ? (
+        <View style={styles.photoContainer}>
+          <TouchableOpacity
+            style={styles.removePhotoButton}
+            onPress={() => setImage(null)}>
+            <Text style={styles.removePhotoText}>{TextValues.RemovePhoto}</Text>
+          </TouchableOpacity>
+          <Image
+            style={{width: 175, height: 175}}
+            source={{
+              uri: image?.assets[0].uri,
+            }}
+          />
+        </View>
+      ) : (
+        <TouchableOpacity onPress={() => handlePhotoFromGallery()}>
+          <Text style={styles.switcherLabel}>{TextValues.AddPhoto}</Text>
+        </TouchableOpacity>
+      )}
 
       <TouchableOpacity
         style={styles.submitButton}

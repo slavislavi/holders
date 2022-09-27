@@ -51,4 +51,17 @@ export const styles = StyleSheet.create({
     position: 'absolute',
     right: 0,
   },
+  photoContainer: {
+    flexDirection: 'row-reverse',
+  },
+  removePhotoButton: {
+    width: 80,
+    paddingLeft: 25,
+  },
+  removePhotoText: {
+    fontSize: 48,
+    lineHeight: 52,
+    fontWeight: '700',
+    color: THEME.DANGER,
+  },
 });
