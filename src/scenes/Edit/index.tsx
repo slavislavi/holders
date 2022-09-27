@@ -1,6 +1,7 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {
   Image,
+  Keyboard,
   ScrollView,
   Switch,
   Text,
@@ -21,6 +22,7 @@ import {styles} from './styles';
 
 export const Edit: FC = () => {
   const [markOnMapSwitcher, setMarkOnMapSwitcher] = useState(false);
+  const [keyboardStatus, setKeyboardStatus] = useState(false);
   const [image, setImage] = useState<ImagePickerResponse | null>(null);
 
   const {control, handleSubmit} = useForm();
@@ -59,9 +61,27 @@ export const Edit: FC = () => {
     console.log(JSON.stringify(newService));
   };
 
+  useEffect(() => {
+    const showSubscription = Keyboard.addListener('keyboardDidShow', () => {
+      setKeyboardStatus(true);
+    });
+    const hideSubscription = Keyboard.addListener('keyboardDidHide', () => {
+      setKeyboardStatus(false);
+    });
+
+    return () => {
+      showSubscription.remove();
+      hideSubscription.remove();
+    };
+  }, []);
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <CustomText style={styles.inputTitle}>{TextValues.FormTitle}</CustomText>
+      {!keyboardStatus && (
+        <CustomText style={styles.inputTitle}>
+          {TextValues.FormTitle}
+        </CustomText>
+      )}
 
       <Controller
         control={control}
@@ -102,22 +122,26 @@ export const Edit: FC = () => {
         )}
       />
 
-      <View style={styles.switherContainer}>
-        <Text style={styles.switcherLabel}>{TextValues.MarkOnMapSwitcher}</Text>
-        <Switch
-          trackColor={{false: THEME.INACTIVE, true: THEME.DANGER_HOVER}}
-          thumbColor={markOnMapSwitcher ? THEME.DANGER : THEME.PAGINATOR_DOT}
-          onValueChange={toggleSwitch}
-          value={markOnMapSwitcher}
-        />
-        {markOnMapSwitcher && (
-          <TouchableOpacity
-            onPress={() => console.log('Mark on map pressed')}
-            style={styles.mapButton}>
-            <AppIcons.EarthIcon width={40} height={40} />
-          </TouchableOpacity>
-        )}
-      </View>
+      {!keyboardStatus && (
+        <View style={styles.switherContainer}>
+          <Text style={styles.switcherLabel}>
+            {TextValues.MarkOnMapSwitcher}
+          </Text>
+          <Switch
+            trackColor={{false: THEME.INACTIVE, true: THEME.DANGER_HOVER}}
+            thumbColor={markOnMapSwitcher ? THEME.DANGER : THEME.PAGINATOR_DOT}
+            onValueChange={toggleSwitch}
+            value={markOnMapSwitcher}
+          />
+          {markOnMapSwitcher && (
+            <TouchableOpacity
+              onPress={() => console.log('Mark on map pressed')}
+              style={styles.mapButton}>
+              <AppIcons.EarthIcon width={40} height={40} />
+            </TouchableOpacity>
+          )}
+        </View>
+      )}
 
       <Controller
         control={control}
@@ -125,7 +149,6 @@ export const Edit: FC = () => {
         render={({field: {value, onChange}}) => (
           <TextInput
             multiline
-            numberOfLines={4}
             style={styles.input}
             placeholder={TextValues.DescPlaceholder}
             value={value}
@@ -134,33 +157,38 @@ export const Edit: FC = () => {
         )}
       />
 
-      {image?.assets ? (
-        <View style={styles.photoContainer}>
-          <TouchableOpacity
-            style={styles.removePhotoButton}
-            onPress={() => setImage(null)}>
-            <Text style={styles.removePhotoText}>{TextValues.RemovePhoto}</Text>
+      {!keyboardStatus &&
+        (image?.assets ? (
+          <View style={styles.photoContainer}>
+            <TouchableOpacity
+              style={styles.removePhotoButton}
+              onPress={() => setImage(null)}>
+              <Text style={styles.removePhotoText}>
+                {TextValues.RemovePhoto}
+              </Text>
+            </TouchableOpacity>
+            <Image
+              style={styles.userImage}
+              source={{
+                uri: image?.assets[0].uri,
+              }}
+            />
+          </View>
+        ) : (
+          <TouchableOpacity onPress={() => handlePhotoFromGallery()}>
+            <Text style={styles.switcherLabel}>{TextValues.AddPhoto}</Text>
           </TouchableOpacity>
-          <Image
-            style={styles.userImage}
-            source={{
-              uri: image?.assets[0].uri,
-            }}
-          />
-        </View>
-      ) : (
-        <TouchableOpacity onPress={() => handlePhotoFromGallery()}>
-          <Text style={styles.switcherLabel}>{TextValues.AddPhoto}</Text>
+        ))}
+
+      {!keyboardStatus && (
+        <TouchableOpacity
+          style={styles.submitButton}
+          onPress={handleSubmit(onSubmit)}>
+          <CustomText style={styles.submitButtonText}>
+            {TextValues.AddButtonText}
+          </CustomText>
         </TouchableOpacity>
       )}
-
-      <TouchableOpacity
-        style={styles.submitButton}
-        onPress={handleSubmit(onSubmit)}>
-        <CustomText style={styles.submitButtonText}>
-          {TextValues.AddButtonText}
-        </CustomText>
-      </TouchableOpacity>
     </ScrollView>
   );
 };
