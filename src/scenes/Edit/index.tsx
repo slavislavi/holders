@@ -76,11 +76,11 @@ export const Edit: FC = () => {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      {!keyboardStatus && (
+      {!keyboardStatus ? (
         <CustomText style={styles.inputTitle}>
           {TextValues.FormTitle}
         </CustomText>
-      )}
+      ) : null}
 
       <Controller
         control={control}
@@ -121,7 +121,7 @@ export const Edit: FC = () => {
         )}
       />
 
-      {!keyboardStatus && (
+      {!keyboardStatus ? (
         <View style={styles.switherContainer}>
           <Text style={styles.switcherLabel}>
             {TextValues.MarkOnMapSwitcher}
@@ -132,15 +132,15 @@ export const Edit: FC = () => {
             onValueChange={toggleSwitch}
             value={markOnMapSwitcher}
           />
-          {markOnMapSwitcher && (
+          {markOnMapSwitcher ? (
             <TouchableOpacity
               onPress={() => console.log('Mark on map pressed')}
               style={styles.mapButton}>
               <AppIcons.EarthIcon width={40} height={40} />
             </TouchableOpacity>
-          )}
+          ) : null}
         </View>
-      )}
+      ) : null}
 
       <Controller
         control={control}
@@ -156,8 +156,8 @@ export const Edit: FC = () => {
         )}
       />
 
-      {!keyboardStatus &&
-        (image?.assets ? (
+      {!keyboardStatus ? (
+        image?.assets ? (
           <View style={styles.photoContainer}>
             <TouchableOpacity
               style={styles.removePhotoButton}
@@ -177,9 +177,10 @@ export const Edit: FC = () => {
           <TouchableOpacity onPress={() => handlePhotoFromGallery()}>
             <Text style={styles.switcherLabel}>{TextValues.AddPhoto}</Text>
           </TouchableOpacity>
-        ))}
+        )
+      ) : null}
 
-      {!keyboardStatus && (
+      {!keyboardStatus ? (
         <TouchableOpacity
           style={styles.submitButton}
           onPress={handleSubmit(onSubmit)}>
@@ -187,7 +188,7 @@ export const Edit: FC = () => {
             {TextValues.AddButtonText}
           </CustomText>
         </TouchableOpacity>
-      )}
+      ) : null}
     </ScrollView>
   );
 };

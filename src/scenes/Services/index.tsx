@@ -1,5 +1,5 @@
 import React, {FC, useEffect, useState} from 'react';
-import {Text} from 'react-native';
+import {View} from 'react-native';
 import {ServicesList} from '@components/ServicesList';
 import firestore from '@react-native-firebase/firestore';
 
@@ -29,7 +29,7 @@ export const Services: FC = () => {
   return (
     <>
       <ServicesList />
-      <Text>{dataFromDb?.type}</Text>
+      <View>{dataFromDb?.type || 'oops!'}</View>
     </>
   );
 };
