@@ -36,7 +36,6 @@ export const Edit: FC = () => {
         includeBase64: true,
       },
       response => {
-        console.log('image: ', response);
         setImage(response);
       },
     );

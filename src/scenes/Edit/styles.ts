@@ -15,7 +15,7 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 25,
   },
   input: {
-    backgroundColor: '#fff',
+    backgroundColor: THEME.INACTIVE,
     borderRadius: 5,
     width: '90%',
     paddingLeft: 12,
