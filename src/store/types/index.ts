@@ -1,6 +1,7 @@
 import {ImagePickerResponse} from 'react-native-image-picker';
 
 export interface GetServiceDataResponse {
+  id: string;
   date: string;
   name: string;
   type: string;
