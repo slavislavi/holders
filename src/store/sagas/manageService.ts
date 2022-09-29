@@ -1,20 +1,22 @@
-import {takeLatest, call, put} from '@redux-saga/core/effects';
 import {ActionType} from 'typesafe-actions';
+import {takeLatest, call, put} from '@redux-saga/core/effects';
+import {PayloadAction} from '@reduxjs/toolkit';
 import {
   addNewServiceAction,
   getServicesDataAction,
 } from '@store/actions/manageService';
-import {GetServiceDataResponse} from '@store/types';
+import {AddServiceParams, GetServiceDataResponse} from '@store/types';
+import {ManageServiceService} from '@services/manageServiceService';
 
 export class ManageServicesSagaWorker {
   static *getServicesData() {
     try {
-      const response: GetServiceDataResponse[] = yield call(() => {
-        return Promise.resolve(console.log('g_e_t resolved'));
-      });
+      const response: GetServiceDataResponse[] = yield call(
+        ManageServiceService.getServicesFromDb,
+      );
       yield put(getServicesDataAction.success(response));
-    } catch (error) {
-      yield put(getServicesDataAction.failure(error as {error: string}));
+    } catch (error: any) {
+      yield put(getServicesDataAction.failure(error));
     }
   }
 
@@ -22,13 +24,9 @@ export class ManageServicesSagaWorker {
     payload,
   }: ActionType<typeof addNewServiceAction.request>) {
     try {
-      yield call(() => {
-        console.log(payload);
-        return Promise.resolve(console.log('a_d_d resolved'));
-      });
-      yield put(addNewServiceAction.success());
-    } catch (error) {
-      yield put(addNewServiceAction.failure(error as {error: string}));
+      yield put(addNewServiceAction.success(payload));
+    } catch (error: any) {
+      yield put(addNewServiceAction.failure(error));
     }
   }
 }

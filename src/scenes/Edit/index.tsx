@@ -9,7 +9,8 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {useForm, Controller, FieldValues} from 'react-hook-form';
+import {useForm, Controller, SubmitHandler} from 'react-hook-form';
+import {useDispatch} from 'react-redux';
 import {
   ImagePickerResponse,
   launchImageLibrary,
@@ -19,13 +20,26 @@ import {TextValues} from '@constants/TextValues';
 import {AppIcons} from '@assets/images';
 import {THEME} from '@styles/theme';
 import {styles} from './styles';
+import {FormDataValues} from './types';
+import {addNewServiceAction} from '@store/actions/manageService';
+import {addDateToServiceData} from '@utils/helpers/addDateToServiceData';
 
 export const Edit: FC = () => {
   const [markOnMapSwitcher, setMarkOnMapSwitcher] = useState(false);
   const [keyboardStatus, setKeyboardStatus] = useState(false);
   const [image, setImage] = useState<ImagePickerResponse | null>(null);
 
-  const {control, handleSubmit} = useForm();
+  const {control, handleSubmit, reset} = useForm({
+    defaultValues: {
+      name: '',
+      type: '',
+      address: '',
+      description: '',
+      photo: null,
+    },
+  });
+
+  const dispatch = useDispatch();
 
   const toggleSwitch = () => setMarkOnMapSwitcher(mark => !mark);
 
@@ -41,23 +55,9 @@ export const Edit: FC = () => {
     );
   };
 
-  const onSubmit = (data: FieldValues) => {
-    const newService = {
-      name: data.name,
-      type: data.type,
-      address: data.address,
-      description: data.description,
-      timestamp: new Date().toISOString(),
-    };
-
-    let newImage = '';
-
-    if (image?.assets) {
-      newImage = image.assets[0].base64 || '';
-    }
-
-    console.log(JSON.stringify(newImage));
-    console.log(JSON.stringify(newService));
+  const onSubmit: SubmitHandler<FormDataValues> = data => {
+    dispatch(addNewServiceAction.request(addDateToServiceData(data)));
+    reset();
   };
 
   useEffect(() => {
@@ -174,7 +174,10 @@ export const Edit: FC = () => {
             />
           </View>
         ) : (
-          <TouchableOpacity onPress={() => handlePhotoFromGallery()}>
+          <TouchableOpacity
+            control={control}
+            name='photo'
+            onPress={() => handlePhotoFromGallery()}>
             <Text style={styles.switcherLabel}>{TextValues.AddPhoto}</Text>
           </TouchableOpacity>
         )
