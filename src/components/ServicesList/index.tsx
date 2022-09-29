@@ -5,23 +5,21 @@ import {
   SectionListRenderItem,
   Text,
 } from 'react-native';
-import {
-  SectionCategoryType,
-  SectionItemType,
-} from '@components/ServicesList/types';
+import {Props} from '@components/ServicesList/types';
 import {CustomText} from '@components/CustomText';
-import {SERVICES_DATA} from '@components/ServicesList/data';
 import {styles} from '@components/ServicesList/styles';
+import {mapDataFromDb, ServiceCategory} from '@utils/helpers/mapDataFromDb';
+import {GetServiceDataResponse} from '@store/types';
 
-export const ServicesList: FC = () => {
+export const ServicesList: FC<Props> = data => {
   const renderItem: SectionListRenderItem<
-    SectionItemType,
-    SectionCategoryType
+    GetServiceDataResponse,
+    ServiceCategory
   > = ({item}) => {
     return <Text style={styles.item}>{item.name}</Text>;
   };
 
-  const renderHeader = ({section}: {section: SectionCategoryType}) => {
+  const renderHeader = ({section}: {section: ServiceCategory}) => {
     return (
       <CustomText style={styles.sectionHeader}>{section.title}</CustomText>
     );
@@ -30,7 +28,7 @@ export const ServicesList: FC = () => {
   return (
     <SafeAreaView style={styles.container}>
       <SectionList
-        sections={SERVICES_DATA}
+        sections={mapDataFromDb(data.data)}
         renderItem={renderItem}
         renderSectionHeader={renderHeader}
         keyExtractor={(_, index) => index.toString()}

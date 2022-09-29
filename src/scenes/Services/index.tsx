@@ -1,35 +1,27 @@
-import React, {FC, useEffect, useState} from 'react';
-import {View} from 'react-native';
+import React, {FC, useEffect} from 'react';
+import {ActivityIndicator} from 'react-native';
 import {ServicesList} from '@components/ServicesList';
-import firestore from '@react-native-firebase/firestore';
+import {useDispatch, useSelector} from 'react-redux';
+import {getServicesDataAction} from '@store/actions/manageService';
+import {
+  dataFromDbSelector,
+  isLoadingSelector,
+} from '@store/selectors/manageService';
+import {styles} from './styles';
 
 export const Services: FC = () => {
-  const [dataFromDb, setDataFromDb] = useState<any>();
+  const loadingFromDb = useSelector(isLoadingSelector);
+  const dataFromDb = useSelector(dataFromDbSelector);
 
-  const fetchDataFromDb = async () => {
-    const servicesFromDb = await firestore()
-      .collection('services')
-      .doc('jjC0u2t98edDXAheQYKJ')
-      .get();
-    console.log('fetchDataFromDb: ', servicesFromDb);
-  };
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    fetchDataFromDb();
+    dispatch(getServicesDataAction.request());
+  }, [dispatch]);
 
-    const subscriber = firestore()
-      .collection('services')
-      .onSnapshot(snapshot =>
-        snapshot.forEach(doc => setDataFromDb(doc.data())),
-      );
-
-    return () => subscriber();
-  }, []);
-
-  return (
-    <>
-      <ServicesList />
-      <View>{dataFromDb?.type || 'oops!'}</View>
-    </>
+  return loadingFromDb ? (
+    <ActivityIndicator style={styles.activityIndicator} />
+  ) : (
+    <ServicesList data={dataFromDb} />
   );
 };

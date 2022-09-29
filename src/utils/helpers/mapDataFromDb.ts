@@ -1,6 +1,6 @@
 import {GetServiceDataResponse} from '@store/types';
 
-type ServiceCategory = {
+export type ServiceCategory = {
   title: string;
   data: GetServiceDataResponse[];
 };

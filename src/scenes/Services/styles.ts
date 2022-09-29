@@ -16,4 +16,8 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 25,
     paddingVertical: 5,
   },
+  activityIndicator: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });

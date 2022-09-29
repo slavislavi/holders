@@ -1,6 +1,5 @@
 import React, {FC, useEffect, useState} from 'react';
 import {
-  Image,
   Keyboard,
   ScrollView,
   Switch,
@@ -11,10 +10,6 @@ import {
 } from 'react-native';
 import {useForm, Controller, SubmitHandler} from 'react-hook-form';
 import {useDispatch} from 'react-redux';
-import {
-  ImagePickerResponse,
-  launchImageLibrary,
-} from 'react-native-image-picker';
 import {CustomText} from '@components/CustomText';
 import {TextValues} from '@constants/TextValues';
 import {AppIcons} from '@assets/images';
@@ -23,11 +18,11 @@ import {styles} from './styles';
 import {FormDataValues} from './types';
 import {addNewServiceAction} from '@store/actions/manageService';
 import {addDateToServiceData} from '@utils/helpers/addDateToServiceData';
+import {CustomImagePicker} from '@components/CustomImagePicker';
 
 export const Edit: FC = () => {
   const [markOnMapSwitcher, setMarkOnMapSwitcher] = useState(false);
   const [keyboardStatus, setKeyboardStatus] = useState(false);
-  const [image, setImage] = useState<ImagePickerResponse | null>(null);
 
   const {control, handleSubmit, reset} = useForm({
     defaultValues: {
@@ -42,18 +37,6 @@ export const Edit: FC = () => {
   const dispatch = useDispatch();
 
   const toggleSwitch = () => setMarkOnMapSwitcher(mark => !mark);
-
-  const handlePhotoFromGallery = () => {
-    launchImageLibrary(
-      {
-        mediaType: 'photo',
-        includeBase64: true,
-      },
-      response => {
-        setImage(response);
-      },
-    );
-  };
 
   const onSubmit: SubmitHandler<FormDataValues> = data => {
     dispatch(addNewServiceAction.request(addDateToServiceData(data)));
@@ -157,30 +140,7 @@ export const Edit: FC = () => {
       />
 
       {!keyboardStatus ? (
-        image?.assets ? (
-          <View style={styles.photoContainer}>
-            <TouchableOpacity
-              style={styles.removePhotoButton}
-              onPress={() => setImage(null)}>
-              <Text style={styles.removePhotoText}>
-                {TextValues.RemovePhoto}
-              </Text>
-            </TouchableOpacity>
-            <Image
-              style={styles.userImage}
-              source={{
-                uri: image?.assets[0].uri,
-              }}
-            />
-          </View>
-        ) : (
-          <TouchableOpacity
-            control={control}
-            name='photo'
-            onPress={() => handlePhotoFromGallery()}>
-            <Text style={styles.switcherLabel}>{TextValues.AddPhoto}</Text>
-          </TouchableOpacity>
-        )
+        <CustomImagePicker name='photo' control={control} />
       ) : null}
 
       {!keyboardStatus ? (
@@ -188,7 +148,7 @@ export const Edit: FC = () => {
           style={styles.submitButton}
           onPress={handleSubmit(onSubmit)}>
           <CustomText style={styles.submitButtonText}>
-            {TextValues.AddButtonText}
+            {TextValues.AddNewServiceButtonText}
           </CustomText>
         </TouchableOpacity>
       ) : null}

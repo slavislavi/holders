@@ -1,6 +1,6 @@
 export enum TextValues {
   FormTitle = 'Fill the forms',
-  AddButtonText = 'Add new',
+  AddNewServiceButtonText = 'Add new',
   BackButtonText = 'Back',
   ArrowRight = '→',
 
