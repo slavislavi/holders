@@ -24,6 +24,7 @@ export class ManageServicesSagaWorker {
   }: ActionType<typeof addNewServiceAction.request>) {
     try {
       yield call(ManageServiceService.addServiceToDb, payload);
+      console.log('payloadAddSaga: ', payload);
       yield put(addNewServiceAction.success());
     } catch (error: any) {
       yield put(addNewServiceAction.failure(error));
