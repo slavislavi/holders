@@ -15,7 +15,7 @@ export const HomeTabs = () => {
 
   return (
     <Navigator
-      initialRouteName='Services'
+      initialRouteName={TextValues.ServicesTitle}
       screenOptions={{
         headerShown: false,
         tabBarStyle: styles.tabContainer,

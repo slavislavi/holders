@@ -5,7 +5,7 @@ import {SliderItemProps} from '@components/Slider/types';
 import {styles} from '@components/Slider/styles';
 
 export const SliderItem: FC<SliderItemProps> = ({
-  item: {image, title, description},
+  item: {image, sliderTitle, description},
 }) => {
   const {width} = useWindowDimensions();
 
@@ -17,7 +17,7 @@ export const SliderItem: FC<SliderItemProps> = ({
         resizeMode='contain'
       />
       <View style={styles.textWrapper}>
-        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.title}>{sliderTitle}</Text>
         <Text style={styles.description}>{description}</Text>
       </View>
     </View>

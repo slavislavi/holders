@@ -21,7 +21,9 @@ export const ServicesList: FC<Props> = data => {
 
   const renderHeader = ({section}: {section: ServiceCategory}) => {
     return (
-      <CustomText style={styles.sectionHeader}>{section.title}</CustomText>
+      <CustomText style={styles.sectionHeader}>
+        {section.categoryTitle}
+      </CustomText>
     );
   };
 

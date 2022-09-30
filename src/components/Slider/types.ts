@@ -2,7 +2,7 @@ import {Animated} from 'react-native';
 
 export type SliderItemType = {
   id: string;
-  title: string;
+  sliderTitle: string;
   description: string;
   image: {uri: string};
 };
