@@ -15,7 +15,7 @@ export const Paginator: FC<PaginatorProps> = ({data, scrollX}) => {
         const dotWidth = scrollX.interpolate({
           inputRange,
           outputRange: [10, 20, 10],
-          extrapolate: 'clamp', // если убрать clamp, то будут видны только три точки
+          extrapolate: 'clamp',
         });
 
         const opacity = scrollX.interpolate({
