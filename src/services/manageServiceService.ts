@@ -20,13 +20,12 @@ export class ManageServiceService {
   }
 
   static async addServiceToDb(data: AddServiceParams) {
-    const pathToFile = `${utils.FilePath.PICTURES_DIRECTORY}/${data.photo?.assets[0].fileName}`;
+    const fileName = data.photo?.assets && data.photo?.assets[0].fileName;
+    const pathToFile = `${utils.FilePath.PICTURES_DIRECTORY}/${fileName}`;
 
-    await storage().ref(data.photo?.assets[0].fileName).putFile(pathToFile);
+    await storage().ref(fileName).putFile(pathToFile);
 
-    const url = await storage()
-      .ref(data.photo?.assets[0].fileName)
-      .getDownloadURL();
+    const url = await storage().ref(fileName).getDownloadURL();
 
     const response = await firestore()
       .collection('services')

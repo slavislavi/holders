@@ -22,8 +22,6 @@ export const CustomImagePicker = <T extends FieldValues>(
           selectionLimit: 1,
         },
         response => {
-          onChange(response);
-
           if (response.didCancel) {
             Alert.alert('User cancelled camera picker');
             return;
@@ -33,6 +31,10 @@ export const CustomImagePicker = <T extends FieldValues>(
           } else if (response.errorCode === 'permission') {
             Alert.alert('Permission not satisfied');
             return;
+          } else {
+            let source = response;
+            const uri = source?.assets && source.assets[0].uri;
+            onChange(uri);
           }
         },
       );
@@ -50,7 +52,7 @@ export const CustomImagePicker = <T extends FieldValues>(
       <Image
         style={styles.userImage}
         source={{
-          uri: value.uri,
+          uri: value,
         }}
       />
     </View>
