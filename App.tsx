@@ -6,7 +6,7 @@ import store from '@store/index';
 export const App = () => {
   return (
     <Provider store={store}>
-      <AppNavigation />;
+      <AppNavigation />
     </Provider>
   );
 };

@@ -15,6 +15,7 @@ export class ManageServiceService {
         ...(doc.data() as Omit<GetServiceDataResponse, 'id'>),
       }),
     );
+    console.log('getServiceFromDb service: ', servicesFromDb.size);
 
     return services;
   }

@@ -1,5 +1,5 @@
 import React, {FC, useEffect} from 'react';
-import {ActivityIndicator} from 'react-native';
+import {ActivityIndicator, View} from 'react-native';
 import {ServicesList} from '@components/ServicesList';
 import {useDispatch, useSelector} from 'react-redux';
 import {getServicesDataAction} from '@store/actions/manageService';
@@ -17,10 +17,13 @@ export const Services: FC = () => {
 
   useEffect(() => {
     dispatch(getServicesDataAction.request());
+    !loadingFromDb && console.log('(1) in Service.tsx: ', dataFromDb);
   }, [dispatch]);
 
   return loadingFromDb ? (
-    <ActivityIndicator style={styles.activityIndicator} />
+    <View style={styles.activityIndicatorBox}>
+      <ActivityIndicator size='large' />
+    </View>
   ) : (
     <ServicesList data={dataFromDb} />
   );

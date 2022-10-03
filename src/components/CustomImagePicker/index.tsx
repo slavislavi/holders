@@ -23,7 +23,7 @@ export const CustomImagePicker = <T extends FieldValues>(
         },
         response => {
           if (response.didCancel) {
-            Alert.alert('User cancelled camera picker');
+            Alert.alert('You cancelled camera picker');
             return;
           } else if (response.errorCode === 'camera_unavailable') {
             Alert.alert('Camera not available on device');
@@ -49,12 +49,7 @@ export const CustomImagePicker = <T extends FieldValues>(
       <TouchableOpacity style={styles.removePhotoButton}>
         <Text style={styles.removePhotoText}>{TextValues.RemovePhoto}</Text>
       </TouchableOpacity>
-      <Image
-        style={styles.userImage}
-        source={{
-          uri: value,
-        }}
-      />
+      <Image style={styles.userImage} source={{uri: value}} />
     </View>
   ) : (
     <TouchableOpacity onPress={handlePhotoFromGallery}>

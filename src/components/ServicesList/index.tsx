@@ -27,6 +27,8 @@ export const ServicesList: FC<Props> = data => {
     );
   };
 
+  console.log('(3) in ServiceList.tsx: ', data);
+
   return (
     <SafeAreaView style={styles.container}>
       <SectionList
