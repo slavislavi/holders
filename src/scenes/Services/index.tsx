@@ -17,7 +17,6 @@ export const Services: FC = () => {
 
   useEffect(() => {
     dispatch(getServicesDataAction.request());
-    !loadingFromDb && console.log('(1) in Service.tsx: ', dataFromDb);
   }, [dispatch]);
 
   return loadingFromDb ? (

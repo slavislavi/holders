@@ -13,7 +13,6 @@ export class ManageServicesSagaWorker {
       const response: GetServiceDataResponse[] = yield call(
         ManageServiceService.getServicesFromDb,
       );
-      console.log('(2) getServices saga: ', response);
       yield put(getServicesDataAction.success(response));
     } catch (error: any) {
       yield put(getServicesDataAction.failure(error));

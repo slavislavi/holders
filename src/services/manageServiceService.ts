@@ -5,7 +5,7 @@ import {AddServiceParams, GetServiceDataResponse} from '@store/types';
 
 export class ManageServiceService {
   static async getServicesFromDb() {
-    const services = [] as GetServiceDataResponse[];
+    const services: any = [];
 
     const servicesFromDb = await firestore().collection('services').get();
 
@@ -15,23 +15,27 @@ export class ManageServiceService {
         ...(doc.data() as Omit<GetServiceDataResponse, 'id'>),
       }),
     );
-    console.log('getServiceFromDb service: ', servicesFromDb.size);
 
     return services;
   }
 
   static async addServiceToDb(data: AddServiceParams) {
-    const fileName = data.photo?.assets && data.photo?.assets[0].fileName;
-    const pathToFile = `${utils.FilePath.PICTURES_DIRECTORY}/${fileName}`;
+    if (data.photo) {
+      const fileName = data.photo?.assets && data.photo?.assets[0].fileName;
+      const pathToFile = `${utils.FilePath.PICTURES_DIRECTORY}/${fileName}`;
 
-    await storage().ref(fileName).putFile(pathToFile);
+      await storage().ref(fileName).putFile(pathToFile);
 
-    const url = await storage().ref(fileName).getDownloadURL();
+      const url = await storage().ref(fileName).getDownloadURL();
 
-    const response = await firestore()
-      .collection('services')
-      .add({...data, photo: url});
+      const response = await firestore()
+        .collection('services')
+        .add({...data, photo: url});
 
-    return response;
+      return response;
+    } else {
+      const response = await firestore().collection('services').add(data);
+      return response;
+    }
   }
 }
