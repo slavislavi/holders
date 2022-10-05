@@ -6,6 +6,7 @@ import {
 } from '@store/actions/manageService';
 import {GetServiceDataResponse} from '@store/types';
 import {ManageServiceService} from '@services/manageServiceService';
+import {FirebaseFirestoreTypes} from '@react-native-firebase/firestore';
 
 export class ManageServicesSagaWorker {
   static *getServicesData() {
@@ -23,9 +24,9 @@ export class ManageServicesSagaWorker {
     payload,
   }: ActionType<typeof addNewServiceAction.request>) {
     try {
-      yield call(ManageServiceService.addServiceToDb, payload);
-      console.log('payloadAddSaga: ', payload);
-      yield put(addNewServiceAction.success());
+      const response: FirebaseFirestoreTypes.DocumentReference<FirebaseFirestoreTypes.DocumentData> =
+        yield call(ManageServiceService.addServiceToDb, payload);
+      yield put(addNewServiceAction.success({...payload, id: response.id}));
     } catch (error: any) {
       yield put(addNewServiceAction.failure(error));
     }

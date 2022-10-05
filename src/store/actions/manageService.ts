@@ -21,7 +21,7 @@ export const addNewServiceAction = createAsyncAction(
   ManageServiceTypes.AddNewService,
   ManageServiceTypes.AddNewServiceSuccess,
   ManageServiceTypes.AddNewServiceFailed,
-)<AddServiceParams, void, {error: string}>();
+)<AddServiceParams, GetServiceDataResponse, {error: string}>();
 
 export type ManageServiceActionUnion =
   | ActionType<typeof getServicesDataAction>

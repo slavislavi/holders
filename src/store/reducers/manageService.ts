@@ -40,9 +40,10 @@ export const reducer = createReducer<State, ManageServiceActionUnion>(
     ...state,
     isLoading: true,
   }))
-  .handleAction(addNewServiceAction.success, state => ({
+  .handleAction(addNewServiceAction.success, (state, action) => ({
     ...state,
     isLoading: false,
+    data: [...state.data, action.payload],
   }))
   .handleAction(addNewServiceAction.failure, (state, action) => ({
     ...state,
