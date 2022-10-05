@@ -5,6 +5,7 @@ import {launchImageLibrary} from 'react-native-image-picker';
 import {TextValues} from '@constants/TextValues';
 import {CustomImagePickerProps} from './types';
 import {styles} from './styles';
+import {CustomText} from '@components/CustomText';
 
 export const CustomImagePicker = <T extends FieldValues>(
   props: CustomImagePickerProps<T>,
@@ -52,8 +53,10 @@ export const CustomImagePicker = <T extends FieldValues>(
       <Image style={styles.userImage} source={{uri: value}} />
     </View>
   ) : (
-    <TouchableOpacity onPress={handlePhotoFromGallery}>
-      <Text style={styles.pickerLabel}>{TextValues.AddPhoto}</Text>
+    <TouchableOpacity
+      style={styles.addPhotoButton}
+      onPress={handlePhotoFromGallery}>
+      <CustomText style={styles.pickerLabel}>{TextValues.AddPhoto}</CustomText>
     </TouchableOpacity>
   );
 };

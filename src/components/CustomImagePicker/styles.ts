@@ -3,10 +3,10 @@ import {THEME} from '@styles/theme';
 
 export const styles = StyleSheet.create({
   pickerLabel: {
-    fontSize: 16,
+    fontSize: 24,
     color: THEME.PRIMARY,
-    lineHeight: 16,
-    paddingRight: 5,
+    textTransform: 'uppercase',
+    lineHeight: 32,
   },
   pickerContainer: {
     flexDirection: 'row-reverse',
@@ -14,6 +14,14 @@ export const styles = StyleSheet.create({
   removePhotoButton: {
     width: 80,
     paddingLeft: 25,
+  },
+  addPhotoButton: {
+    borderWidth: 1,
+    paddingHorizontal: 46,
+    borderColor: THEME.DANGER,
+    borderRadius: 5,
+    height: 48,
+    justifyContent: 'center',
   },
   removePhotoText: {
     fontSize: 48,

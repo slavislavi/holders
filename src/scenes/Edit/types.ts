@@ -4,8 +4,8 @@ export interface FormDataValues {
   name: string;
   type: string;
   address: {
-    latitude: number;
-    longitude: number;
+    latitude: string;
+    longitude: string;
   };
   description: string;
   photo: ImagePickerResponse | null;

@@ -88,43 +88,105 @@ export const Edit: FC = () => {
           <Controller
             control={control}
             name='name'
-            rules={{required: true}}
-            render={({field: {value, onChange}}) => (
-              <TextInput
-                style={styles.input}
-                placeholder={TextValues.NamePlaceholder}
-                value={value}
-                onChangeText={onChange}
-              />
+            rules={{required: true, maxLength: 24}}
+            render={({field: {value, onChange, ref}, formState}) => (
+              <View style={styles.inputWrapper}>
+                <TextInput
+                  style={styles.input}
+                  placeholder={TextValues.NamePlaceholder}
+                  value={value}
+                  onChangeText={onChange}
+                  ref={ref}
+                />
+                {formState.errors.name?.type === 'required' && (
+                  <Text style={styles.errorText}>
+                    {TextValues.NameReqiuredInputErrTxt}
+                  </Text>
+                )}
+                {formState.errors.name?.type === 'maxLength' && (
+                  <Text style={styles.errorText}>
+                    {TextValues.NameLengthInputErrTxt}
+                  </Text>
+                )}
+              </View>
             )}
           />
 
           <Controller
             control={control}
             name='type'
-            rules={{required: true}}
-            render={({field: {value, onChange}}) => (
-              <TextInput
-                style={styles.input}
-                placeholder={TextValues.TypePlaceholder}
-                value={value}
-                onChangeText={onChange}
-              />
+            rules={{required: true, maxLength: 24}}
+            render={({field: {value, onChange, ref}, formState}) => (
+              <View style={styles.inputWrapper}>
+                <TextInput
+                  style={styles.input}
+                  placeholder={TextValues.TypePlaceholder}
+                  value={value}
+                  onChangeText={onChange}
+                  ref={ref}
+                />
+                {formState.errors.type?.type === 'required' && (
+                  <Text style={styles.errorText}>
+                    {TextValues.TypeReqiuredInputErrTxt}
+                  </Text>
+                )}
+                {formState.errors.name?.type === 'maxLength' && (
+                  <Text style={styles.errorText}>
+                    {TextValues.TypeLengthInputErrTxt}
+                  </Text>
+                )}
+              </View>
             )}
           />
 
-          <Controller
-            control={control}
-            name='address'
-            render={({field: {value, onChange}}) => (
-              <TextInput
-                style={styles.input}
-                placeholder={TextValues.AddressPlaceholder}
-                value={value}
-                onChangeText={onChange}
-              />
-            )}
-          />
+          <View style={styles.inputAddressBox}>
+            <Controller
+              control={control}
+              name='address.latitude'
+              rules={{max: 180}}
+              render={({field: {value, onChange, ref}, formState}) => (
+                <View>
+                  <TextInput
+                    nativeID='address.latitude'
+                    style={[styles.input, styles.inputAddress]}
+                    placeholder={TextValues.AddressPlaceholderLt}
+                    value={value}
+                    onChangeText={onChange}
+                    keyboardType='number-pad'
+                    ref={ref}
+                  />
+                  {formState.errors.address?.latitude && (
+                    <Text style={[styles.errorText, styles.errorAddressText]}>
+                      {TextValues.LatLengthInputErrTxt}
+                    </Text>
+                  )}
+                </View>
+              )}
+            />
+
+            <Controller
+              control={control}
+              name='address.longitude'
+              rules={{max: 90}}
+              render={({field: {value, onChange, ref}, formState}) => (
+                <View>
+                  <TextInput
+                    style={[styles.input, styles.inputAddress]}
+                    placeholder={TextValues.AddressPlaceholderLg}
+                    value={value}
+                    onChangeText={onChange}
+                    keyboardType='number-pad'
+                    ref={ref}
+                  />
+                  {formState.errors.address?.longitude && (
+                    <Text style={[styles.errorText, styles.errorAddressText]}>
+                      {TextValues.LonLengthInputErrTxt}
+                    </Text>
+                  )}
+                </View>
+              )}
+            />
+          </View>
 
           {!keyboardStatus ? (
             <View style={styles.switherContainer}>
@@ -149,15 +211,24 @@ export const Edit: FC = () => {
 
           <Controller
             control={control}
+            rules={{maxLength: 200}}
             name='description'
-            render={({field: {value, onChange}}) => (
-              <TextInput
-                multiline
-                style={styles.input}
-                placeholder={TextValues.DescPlaceholder}
-                value={value}
-                onChangeText={onChange}
-              />
+            render={({field: {value, onChange, ref}, formState}) => (
+              <View style={styles.inputWrapper}>
+                <TextInput
+                  multiline
+                  style={styles.input}
+                  placeholder={TextValues.DescPlaceholder}
+                  value={value}
+                  onChangeText={onChange}
+                  ref={ref}
+                />
+                {formState.errors.description && (
+                  <Text style={styles.errorText}>
+                    {TextValues.DescrLengthInputErrTxt}
+                  </Text>
+                )}
+              </View>
             )}
           />
 

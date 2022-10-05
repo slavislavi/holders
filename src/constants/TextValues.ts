@@ -6,7 +6,8 @@ export const TextValues = {
 
   NamePlaceholder: 'Name',
   TypePlaceholder: 'Type',
-  AddressPlaceholder: 'Address',
+  AddressPlaceholderLt: 'Latitude',
+  AddressPlaceholderLg: 'Longitude',
   DescPlaceholder: 'Description',
   FilePlaceholder: 'Add the photo',
 
@@ -18,4 +19,12 @@ export const TextValues = {
   MarkOnMapSwitcher: 'Mark on map',
   AddPhoto: 'Add Photo',
   RemovePhoto: '☒',
+
+  NameReqiuredInputErrTxt: 'Name field is required',
+  NameLengthInputErrTxt: 'Name cannot be more than 24',
+  TypeReqiuredInputErrTxt: 'Type field is required',
+  TypeLengthInputErrTxt: 'Type cannot be more than 24',
+  LatLengthInputErrTxt: 'Latitude must not be more than 180',
+  LonLengthInputErrTxt: 'Longitude must not be more than 90',
+  DescrLengthInputErrTxt: 'Please, maximum 200 symbols',
 };

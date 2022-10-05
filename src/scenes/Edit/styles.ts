@@ -22,6 +22,10 @@ export const styles = StyleSheet.create({
     color: THEME.PRIMARY,
     fontSize: 18,
   },
+  inputAddress: {
+    width: '100%',
+    minWidth: 160,
+  },
   submitButton: {
     backgroundColor: THEME.DANGER,
     borderRadius: 5,
@@ -67,5 +71,29 @@ export const styles = StyleSheet.create({
   userImage: {
     width: 148,
     height: 148,
+  },
+  inputWrapper: {
+    position: 'relative',
+    width: '100%',
+    alignItems: 'center',
+  },
+  inputAddressBox: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '90%',
+  },
+  errorText: {
+    position: 'absolute',
+    bottom: -18,
+    left: '8%',
+    color: THEME.DANGER,
+    fontSize: 12,
+  },
+  errorAddressText: {
+    position: 'absolute',
+    bottom: -30,
+    left: 0,
+    color: THEME.DANGER,
+    fontSize: 12,
   },
 });
