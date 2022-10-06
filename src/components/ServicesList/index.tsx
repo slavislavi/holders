@@ -1,22 +1,18 @@
 import React, {FC} from 'react';
-import {
-  SafeAreaView,
-  SectionList,
-  SectionListRenderItem,
-  Text,
-} from 'react-native';
+import {SafeAreaView, SectionList, SectionListRenderItem} from 'react-native';
 import {Props} from '@components/ServicesList/types';
 import {CustomText} from '@components/CustomText';
 import {styles} from '@components/ServicesList/styles';
 import {mapDataFromDb, ServiceCategory} from '@utils/helpers/mapDataFromDb';
 import {GetServiceDataResponse} from '@store/types';
+import {CustomModal} from '@components/CustomModal';
 
 export const ServicesList: FC<Props> = data => {
   const renderItem: SectionListRenderItem<
     GetServiceDataResponse,
     ServiceCategory
   > = ({item}) => {
-    return <Text style={styles.item}>{item.name}</Text>;
+    return <CustomModal data={item} />;
   };
 
   const renderHeader = ({section}: {section: ServiceCategory}) => {

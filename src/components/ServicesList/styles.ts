@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
     backgroundColor: THEME.APP_BG,
   },
   item: {
-    fontSize: 24,
+    fontSize: 22,
     padding: 10,
     height: 50,
   },
