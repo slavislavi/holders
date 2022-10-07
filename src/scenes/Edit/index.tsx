@@ -154,6 +154,7 @@ export const Edit: FC = () => {
                     onChangeText={onChange}
                     keyboardType='number-pad'
                     ref={ref}
+                    maxLength={12}
                   />
                   {formState.errors.address?.latitude && (
                     <Text style={[styles.errorText, styles.errorAddressText]}>
@@ -177,6 +178,7 @@ export const Edit: FC = () => {
                     onChangeText={onChange}
                     keyboardType='number-pad'
                     ref={ref}
+                    maxLength={12}
                   />
                   {formState.errors.address?.longitude && (
                     <Text style={[styles.errorText, styles.errorAddressText]}>

@@ -1,16 +1,9 @@
 import React, {FC, useState} from 'react';
-import {
-  Image,
-  ImageSourcePropType,
-  Modal,
-  Pressable,
-  Text,
-  View,
-} from 'react-native';
+import {Image, Modal, Pressable, Text, View} from 'react-native';
 import {GetServiceDataResponse} from '@store/types';
 import {TextValues} from '@constants/TextValues';
+import {AppImages} from '@assets/images';
 import {styles} from './styles';
-import {firebase} from '@react-native-firebase/storage';
 
 type ModalProps = {
   data: GetServiceDataResponse;
@@ -18,33 +11,25 @@ type ModalProps = {
 
 export const CustomModal: FC<ModalProps> = ({data}) => {
   const [modalVisible, setModalVisible] = useState(false);
-  const [imageUrl, setImageUrl] = useState<ImageSourcePropType>();
-
-  let imageRef = firebase
-    .storage()
-    .ref(data.photo?.assets && data.photo?.assets[0].fileName);
-  imageRef
-    .getDownloadURL()
-    .then(url => {
-      return setImageUrl(url);
-    })
-    .catch(e => console.log('getting downloadURL of image error => ', e));
-
-  const handleModalVisible = () => setModalVisible(!modalVisible);
-
+  console.log('URI: ', data.photo);
   return (
     <>
       <Modal animationType='slide' transparent={true} visible={modalVisible}>
         <View style={styles.outerBox}>
           <View style={styles.innerBox}>
-            <Pressable onPress={handleModalVisible}>
+            <Pressable onPress={() => setModalVisible(false)}>
               <Text style={styles.closeModalButton}>
                 {TextValues.RemovePhoto}
               </Text>
             </Pressable>
             <Text style={styles.nameText}>{data.name}</Text>
             <Text style={styles.typeText}>{data.type}</Text>
-            <Image source={imageUrl} />
+            {data.photo ? (
+              <Image style={styles.modalImage} source={AppImages.NoImage} />
+            ) : (
+              <Image style={styles.modalImage} source={AppImages.NoImage} />
+            )}
+            <Text style={styles.descriptionText}>{data.description}</Text>
           </View>
         </View>
       </Modal>

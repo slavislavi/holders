@@ -1,5 +1,6 @@
 import {ActionType, createAsyncAction} from 'typesafe-actions';
 import {AddServiceParams, GetServiceDataResponse} from '@store/types';
+import {AnyAction} from '@reduxjs/toolkit';
 
 export enum ManageServiceTypes {
   GetServicesData = '[ManageService] GetServicesData',
@@ -21,7 +22,7 @@ export const addNewServiceAction = createAsyncAction(
   ManageServiceTypes.AddNewService,
   ManageServiceTypes.AddNewServiceSuccess,
   ManageServiceTypes.AddNewServiceFailed,
-)<AddServiceParams, GetServiceDataResponse, {error: string}>();
+)<AddServiceParams, AnyAction, {error: string}>();
 
 export type ManageServiceActionUnion =
   | ActionType<typeof getServicesDataAction>

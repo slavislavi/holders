@@ -6,11 +6,11 @@ export interface GetServiceDataResponse {
   name: string;
   type: string;
   address: {
-    latitude: number;
-    longitude: number;
+    latitude: string;
+    longitude: string;
   };
   description: string;
-  photo: ImagePickerResponse | null;
+  photo: string | null;
 }
 
 export interface AddServiceParams {

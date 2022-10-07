@@ -25,6 +25,7 @@ export const styles = StyleSheet.create({
   inputAddress: {
     width: '100%',
     minWidth: 160,
+    maxWidth: 170,
   },
   submitButton: {
     backgroundColor: THEME.DANGER,

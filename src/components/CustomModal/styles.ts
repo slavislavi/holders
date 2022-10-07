@@ -21,20 +21,29 @@ export const styles = StyleSheet.create({
   },
   closeModalButton: {
     position: 'absolute',
-    right: 0,
-    top: -12,
+    right: -2,
+    top: -50,
     fontSize: 42,
     color: THEME.DANGER,
   },
   nameText: {
     fontSize: 20,
     fontWeight: '700',
-    paddingTop: 40,
+    paddingTop: 20,
     paddingHorizontal: 15,
   },
   typeText: {
     fontSize: 20,
     paddingHorizontal: 15,
     paddingVertical: 10,
+  },
+  descriptionText: {
+    fontSize: 16,
+    paddingHorizontal: 15,
+    paddingVertical: 10,
+  },
+  modalImage: {
+    width: '100%',
+    height: 200,
   },
 });

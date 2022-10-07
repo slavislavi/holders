@@ -20,6 +20,8 @@ import AddressICon from './address-input.svg';
 import DescriptionIcon from './desc-input.svg';
 import FileIcon from './file-input.svg';
 
+import NoImage from './noimage.jpg';
+
 export const AppIcons = {
   MapFilled,
   MapOutlined,
@@ -46,4 +48,8 @@ export const InputIcons = {
   AddressICon,
   DescriptionIcon,
   FileIcon,
+};
+
+export const AppImages = {
+  NoImage,
 };

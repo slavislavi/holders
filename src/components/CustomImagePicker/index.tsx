@@ -19,7 +19,7 @@ export const CustomImagePicker = <T extends FieldValues>(
       launchImageLibrary(
         {
           mediaType: 'photo',
-          includeBase64: true,
+          includeBase64: false,
           selectionLimit: 1,
         },
         response => {
