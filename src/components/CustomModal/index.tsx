@@ -11,7 +11,7 @@ type ModalProps = {
 
 export const CustomModal: FC<ModalProps> = ({data}) => {
   const [modalVisible, setModalVisible] = useState(false);
-  console.log('URI: ', data.photo);
+  console.log('___data.photo___: ', data.photo);
   return (
     <>
       <Modal animationType='slide' transparent={true} visible={modalVisible}>
@@ -25,7 +25,7 @@ export const CustomModal: FC<ModalProps> = ({data}) => {
             <Text style={styles.nameText}>{data.name}</Text>
             <Text style={styles.typeText}>{data.type}</Text>
             {data.photo ? (
-              <Image style={styles.modalImage} source={AppImages.NoImage} />
+              <Image style={styles.modalImage} source={{uri: data.photo}} />
             ) : (
               <Image style={styles.modalImage} source={AppImages.NoImage} />
             )}

@@ -15,10 +15,10 @@ export const Map: FC = () => {
       <MapView
         style={{width: width, height: height}}
         initialRegion={{
-          latitude: 41.61,
+          latitude: 41.62,
           longitude: 41.62,
-          latitudeDelta: 0.09,
-          longitudeDelta: 0.04,
+          latitudeDelta: 0.1,
+          longitudeDelta: 0.06,
         }}>
         {!!dataFromDb.length &&
           dataFromDb.map(service => (

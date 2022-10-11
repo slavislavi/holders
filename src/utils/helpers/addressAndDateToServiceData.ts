@@ -5,7 +5,7 @@ export const addressAndDateToServiceData = ({
   ...rest
 }: FormDataValues) => {
   return {
-    address: {latitude: address.latitude, longitude: address.longitude},
+    address: {latitude: +address.latitude, longitude: +address.longitude},
     date: new Date().toISOString(),
     ...rest,
   };
