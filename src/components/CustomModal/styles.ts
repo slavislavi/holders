@@ -27,7 +27,7 @@ export const styles = StyleSheet.create({
     color: THEME.DANGER,
   },
   nameText: {
-    fontSize: 20,
+    fontSize: 24,
     fontWeight: '700',
     paddingTop: 20,
     paddingHorizontal: 15,

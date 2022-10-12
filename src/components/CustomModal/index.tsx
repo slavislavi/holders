@@ -16,7 +16,7 @@ export const CustomModal: FC<ModalProps> = ({data}) => {
       .ref(`/images/${fileName}`)
       .getDownloadURL()
       .then(url => setImageURL(url))
-      .catch(e => console.log('Errors while downloading => ', e));
+      .catch(error => console.log('Errors while downloading => ', error));
   }, [data.photo]);
 
   console.log('!!! imageURL: ', imageURL);

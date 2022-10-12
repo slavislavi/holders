@@ -45,11 +45,13 @@ export const CustomImagePicker = <T extends FieldValues>(
     }
   };
 
+  const handleCancelSelectedPhoto = () => onChange(null);
+
   return value ? (
     <View style={styles.pickerContainer}>
       <TouchableOpacity
         style={styles.removePhotoButton}
-        onPress={() => console.log('TODO: removing selected photo')}>
+        onPress={handleCancelSelectedPhoto}>
         <Text style={styles.removePhotoText}>{TextValues.RemovePhoto}</Text>
       </TouchableOpacity>
       <Image style={styles.userImage} source={{uri: value}} />
