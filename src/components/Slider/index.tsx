@@ -31,6 +31,7 @@ export const Slider = () => {
     if (currentIndex < slides.length - 1) {
       slidesRef.current?.scrollToIndex({index: currentIndex + 1});
     } else {
+      slidesRef.current?.scrollToIndex({index: 0});
       navigation.navigate('Home', {screen: 'Services'});
     }
   };
