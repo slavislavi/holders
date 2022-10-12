@@ -1,17 +1,25 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {Image, Modal, Pressable, Text, View} from 'react-native';
-import {GetServiceDataResponse} from '@store/types';
+import storage from '@react-native-firebase/storage';
 import {TextValues} from '@constants/TextValues';
 import {AppImages} from '@assets/images';
+import {ModalProps} from './types';
 import {styles} from './styles';
-
-type ModalProps = {
-  data: GetServiceDataResponse;
-};
 
 export const CustomModal: FC<ModalProps> = ({data}) => {
   const [modalVisible, setModalVisible] = useState(false);
-  console.log('___data.photo___: ', data.photo);
+  const [imageURL, setImageURL] = useState('');
+
+  useEffect(() => {
+    const fileName = data.photo?.split('/').pop();
+    storage()
+      .ref(`/images/${fileName}`)
+      .getDownloadURL()
+      .then(url => setImageURL(url))
+      .catch(e => console.log('Errors while downloading => ', e));
+  }, [data.photo]);
+
+  console.log('!!! imageURL: ', imageURL);
   return (
     <>
       <Modal animationType='slide' transparent={true} visible={modalVisible}>
@@ -25,7 +33,7 @@ export const CustomModal: FC<ModalProps> = ({data}) => {
             <Text style={styles.nameText}>{data.name}</Text>
             <Text style={styles.typeText}>{data.type}</Text>
             {data.photo ? (
-              <Image style={styles.modalImage} source={{uri: data.photo}} />
+              <Image style={styles.modalImage} source={{uri: imageURL}} />
             ) : (
               <Image style={styles.modalImage} source={AppImages.NoImage} />
             )}
