@@ -120,6 +120,7 @@ export const Edit: FC = () => {
               <View style={styles.inputWrapper}>
                 <TextInput
                   style={styles.input}
+                  autoCapitalize={'characters'}
                   placeholder={TextValues.TypePlaceholder}
                   value={value}
                   onChangeText={onChange}

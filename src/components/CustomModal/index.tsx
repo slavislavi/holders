@@ -19,7 +19,6 @@ export const CustomModal: FC<ModalProps> = ({data}) => {
       .catch(error => console.log('Errors while downloading => ', error));
   }, [data.photo]);
 
-  console.log('!!! imageURL: ', imageURL);
   return (
     <>
       <Modal animationType='slide' transparent={true} visible={modalVisible}>
