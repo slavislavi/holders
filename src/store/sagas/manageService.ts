@@ -26,6 +26,7 @@ export class ManageServicesSagaWorker {
     try {
       const response: FirebaseFirestoreTypes.DocumentReference<FirebaseFirestoreTypes.DocumentData> =
         yield call(ManageServiceService.addServiceToDb, payload);
+      console.log('addNewService SAGA: ', response); // TO REMOVE
       yield put(addNewServiceAction.success({...payload, id: response.id}));
     } catch (error: any) {
       yield put(addNewServiceAction.failure(error));

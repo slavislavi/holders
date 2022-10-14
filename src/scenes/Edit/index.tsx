@@ -29,7 +29,7 @@ export const Edit: FC = () => {
   const [keyboardStatus, setKeyboardStatus] = useState(false);
   const [isMap, setIsMap] = useState(false);
 
-  const {control, handleSubmit, setValue, reset} = useForm({
+  const {control, handleSubmit, setValue} = useForm({
     defaultValues: {
       name: '',
       type: '',
@@ -58,7 +58,8 @@ export const Edit: FC = () => {
 
   const onSubmit: SubmitHandler<FormDataValues> = data => {
     dispatch(addNewServiceAction.request(addressAndDateToServiceData(data)));
-    reset();
+    console.log('...submit data...'); // REMOVE
+    // reset();
   };
 
   useEffect(() => {

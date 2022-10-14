@@ -35,6 +35,7 @@ export const CustomImagePicker = <T extends FieldValues>(
           } else {
             let source = response;
             const uri = source?.assets && source.assets[0].uri;
+            console.log('CustomImagePicker - value(uri): ', uri); // TO REMOVE
             onChange(uri);
           }
         },

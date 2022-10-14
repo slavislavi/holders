@@ -1,4 +1,3 @@
-import {ImagePickerResponse} from 'react-native-image-picker';
 import {LatLng} from 'react-native-maps';
 
 export interface GetServiceDataResponse {
@@ -17,5 +16,5 @@ export interface AddServiceParams {
   type: string;
   address: LatLng;
   description: string;
-  photo: ImagePickerResponse | null;
+  photo: string | undefined;
 }
