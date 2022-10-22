@@ -6,6 +6,7 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
+  TouchableWithoutFeedback,
   View,
 } from 'react-native';
 import {useForm, Controller, SubmitHandler} from 'react-hook-form';
@@ -79,169 +80,171 @@ export const Edit: FC = () => {
   }, []);
 
   return (
-    <SafeAreaView style={styles.container}>
-      {!isMap ? (
-        <>
-          {!keyboardStatus ? (
-            <CustomText style={styles.inputTitle}>
-              {TextValues.FormTitle}
-            </CustomText>
-          ) : null}
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+      <SafeAreaView style={styles.container}>
+        {!isMap ? (
+          <>
+            {!keyboardStatus ? (
+              <CustomText style={styles.inputTitle}>
+                {TextValues.FormTitle}
+              </CustomText>
+            ) : null}
 
-          <Controller
-            control={control}
-            name='name'
-            rules={{required: true, maxLength: 24}}
-            render={({field: {value, onChange, ref}, formState}) => (
-              <View style={styles.inputWrapper}>
-                <TextInput
-                  style={styles.input}
-                  placeholder={TextValues.NamePlaceholder}
-                  value={value}
-                  onChangeText={onChange}
-                  ref={ref}
-                />
-                {formState.errors.name?.type === 'required' && (
-                  <Text style={styles.errorText}>
-                    {TextValues.NameReqiuredInputErrTxt}
-                  </Text>
-                )}
-                {formState.errors.name?.type === 'maxLength' && (
-                  <Text style={styles.errorText}>
-                    {TextValues.NameLengthInputErrTxt}
-                  </Text>
-                )}
-              </View>
-            )}
-          />
-
-          <DropdownPicker
-            initialItems={serviceItemsTypes}
-            control={control}
-            name='type'
-            placeholder={TextValues.DropdownPlaceholder}
-          />
-
-          <View style={styles.inputAddressBox}>
             <Controller
               control={control}
-              name='address.latitude'
-              rules={{max: 180}}
+              name='name'
+              rules={{required: true, maxLength: 24}}
               render={({field: {value, onChange, ref}, formState}) => (
-                <View>
+                <View style={styles.inputWrapper}>
                   <TextInput
-                    nativeID='address.latitude'
-                    style={[styles.input, styles.inputAddress]}
-                    placeholder={TextValues.AddressPlaceholderLt}
+                    style={styles.input}
+                    placeholder={TextValues.NamePlaceholder}
                     value={value}
                     onChangeText={onChange}
-                    keyboardType='number-pad'
                     ref={ref}
-                    maxLength={12}
                   />
-                  {formState.errors.address?.latitude && (
-                    <Text style={[styles.errorText, styles.errorAddressText]}>
-                      {TextValues.LatLengthInputErrTxt}
+                  {formState.errors.name?.type === 'required' && (
+                    <Text style={styles.errorText}>
+                      {TextValues.NameReqiuredInputErrTxt}
+                    </Text>
+                  )}
+                  {formState.errors.name?.type === 'maxLength' && (
+                    <Text style={styles.errorText}>
+                      {TextValues.NameLengthInputErrTxt}
                     </Text>
                   )}
                 </View>
               )}
             />
 
+            <DropdownPicker
+              initialItems={serviceItemsTypes}
+              control={control}
+              name='type'
+              placeholder={TextValues.DropdownPlaceholder}
+            />
+
+            <View style={styles.inputAddressBox}>
+              <Controller
+                control={control}
+                name='address.latitude'
+                rules={{max: 180}}
+                render={({field: {value, onChange, ref}, formState}) => (
+                  <View>
+                    <TextInput
+                      nativeID='address.latitude'
+                      style={[styles.input, styles.inputAddress]}
+                      placeholder={TextValues.AddressPlaceholderLt}
+                      value={value}
+                      onChangeText={onChange}
+                      keyboardType='number-pad'
+                      ref={ref}
+                      maxLength={12}
+                    />
+                    {formState.errors.address?.latitude && (
+                      <Text style={[styles.errorText, styles.errorAddressText]}>
+                        {TextValues.LatLengthInputErrTxt}
+                      </Text>
+                    )}
+                  </View>
+                )}
+              />
+
+              <Controller
+                control={control}
+                name='address.longitude'
+                rules={{max: 90}}
+                render={({field: {value, onChange, ref}, formState}) => (
+                  <View>
+                    <TextInput
+                      style={[styles.input, styles.inputAddress]}
+                      placeholder={TextValues.AddressPlaceholderLg}
+                      value={value}
+                      onChangeText={onChange}
+                      keyboardType='number-pad'
+                      ref={ref}
+                      maxLength={12}
+                    />
+                    {formState.errors.address?.longitude && (
+                      <Text style={[styles.errorText, styles.errorAddressText]}>
+                        {TextValues.LonLengthInputErrTxt}
+                      </Text>
+                    )}
+                  </View>
+                )}
+              />
+            </View>
+
+            <View style={styles.switherContainer}>
+              <Text style={styles.switcherLabel}>
+                {TextValues.MarkOnMapSwitcher}
+              </Text>
+              <Switch
+                trackColor={{false: THEME.INACTIVE, true: THEME.DANGER_HOVER}}
+                thumbColor={
+                  markOnMapSwitcher ? THEME.DANGER : THEME.PAGINATOR_DOT
+                }
+                onValueChange={toggleSwitch}
+                value={markOnMapSwitcher}
+              />
+              {markOnMapSwitcher ? (
+                <TouchableOpacity onPress={showMap} style={styles.mapButton}>
+                  <AppIcons.EarthIcon width={40} height={40} />
+                </TouchableOpacity>
+              ) : null}
+            </View>
+
             <Controller
               control={control}
-              name='address.longitude'
-              rules={{max: 90}}
+              rules={{maxLength: 200}}
+              name='description'
               render={({field: {value, onChange, ref}, formState}) => (
-                <View>
+                <View style={styles.inputWrapper}>
                   <TextInput
-                    style={[styles.input, styles.inputAddress]}
-                    placeholder={TextValues.AddressPlaceholderLg}
+                    multiline
+                    style={styles.input}
+                    placeholder={TextValues.DescPlaceholder}
                     value={value}
                     onChangeText={onChange}
-                    keyboardType='number-pad'
                     ref={ref}
-                    maxLength={12}
                   />
-                  {formState.errors.address?.longitude && (
-                    <Text style={[styles.errorText, styles.errorAddressText]}>
-                      {TextValues.LonLengthInputErrTxt}
+                  {formState.errors.description && (
+                    <Text style={styles.errorText}>
+                      {TextValues.DescrLengthInputErrTxt}
                     </Text>
                   )}
                 </View>
               )}
             />
-          </View>
 
-          <View style={styles.switherContainer}>
-            <Text style={styles.switcherLabel}>
-              {TextValues.MarkOnMapSwitcher}
-            </Text>
-            <Switch
-              trackColor={{false: THEME.INACTIVE, true: THEME.DANGER_HOVER}}
-              thumbColor={
-                markOnMapSwitcher ? THEME.DANGER : THEME.PAGINATOR_DOT
-              }
-              onValueChange={toggleSwitch}
-              value={markOnMapSwitcher}
-            />
-            {markOnMapSwitcher ? (
-              <TouchableOpacity onPress={showMap} style={styles.mapButton}>
-                <AppIcons.EarthIcon width={40} height={40} />
+            {!keyboardStatus ? (
+              <CustomImagePicker name='photo' control={control} />
+            ) : null}
+
+            {!keyboardStatus ? (
+              <TouchableOpacity
+                style={styles.submitButton}
+                onPress={handleSubmit(onSubmit)}>
+                <CustomText style={styles.submitButtonText}>
+                  {TextValues.AddNewServiceButtonText}
+                </CustomText>
               </TouchableOpacity>
             ) : null}
-          </View>
-
-          <Controller
-            control={control}
-            rules={{maxLength: 200}}
-            name='description'
-            render={({field: {value, onChange, ref}, formState}) => (
-              <View style={styles.inputWrapper}>
-                <TextInput
-                  multiline
-                  style={styles.input}
-                  placeholder={TextValues.DescPlaceholder}
-                  value={value}
-                  onChangeText={onChange}
-                  ref={ref}
-                />
-                {formState.errors.description && (
-                  <Text style={styles.errorText}>
-                    {TextValues.DescrLengthInputErrTxt}
-                  </Text>
-                )}
-              </View>
-            )}
+          </>
+        ) : (
+          <MapView
+            provider={PROVIDER_GOOGLE}
+            onPress={pickPointOnMap}
+            style={{width: width, height: height}}
+            initialRegion={{
+              latitude: 41.61,
+              longitude: 41.62,
+              latitudeDelta: 0.09,
+              longitudeDelta: 0.04,
+            }}
           />
-
-          {!keyboardStatus ? (
-            <CustomImagePicker name='photo' control={control} />
-          ) : null}
-
-          {!keyboardStatus ? (
-            <TouchableOpacity
-              style={styles.submitButton}
-              onPress={handleSubmit(onSubmit)}>
-              <CustomText style={styles.submitButtonText}>
-                {TextValues.AddNewServiceButtonText}
-              </CustomText>
-            </TouchableOpacity>
-          ) : null}
-        </>
-      ) : (
-        <MapView
-          provider={PROVIDER_GOOGLE}
-          onPress={pickPointOnMap}
-          style={{width: width, height: height}}
-          initialRegion={{
-            latitude: 41.61,
-            longitude: 41.62,
-            latitudeDelta: 0.09,
-            longitudeDelta: 0.04,
-          }}
-        />
-      )}
-    </SafeAreaView>
+        )}
+      </SafeAreaView>
+    </TouchableWithoutFeedback>
   );
 };
