@@ -5,21 +5,23 @@ import {AddServiceParams, GetServiceDataResponse} from '@store/types';
 
 export class ManageServiceService {
   static async getServicesFromDb() {
-    const services: any = [];
+    const services = [] as GetServiceDataResponse[];
 
-    const servicesFromDb = await firestore().collection('services').get();
+    const servicesFromDb = await firestore()
+      .collection<Omit<GetServiceDataResponse, 'id'>>('services')
+      .get();
 
     servicesFromDb.forEach(doc =>
       services.push({
         id: doc.id,
-        ...(doc.data() as Omit<GetServiceDataResponse, 'id'>),
+        ...doc.data(),
       }),
     );
     return services;
   }
 
   static async addServiceToDb(data: AddServiceParams) {
-    if (data.photo != null) {
+    if (data.photo) {
       const fileName = data.photo;
       console.log('<addServiceToDb> submit fileName: ', fileName); // TO REMOVE
 

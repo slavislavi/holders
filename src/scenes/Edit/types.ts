@@ -8,5 +8,5 @@ export interface FormDataValues {
     longitude: string;
   };
   description: string;
-  photo: ImagePickerResponse | null;
+  photo?: ImagePickerResponse | any;
 }

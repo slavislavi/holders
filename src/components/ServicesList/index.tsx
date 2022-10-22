@@ -6,6 +6,8 @@ import {styles} from '@components/ServicesList/styles';
 import {mapDataFromDb, ServiceCategory} from '@utils/helpers/mapDataFromDb';
 import {GetServiceDataResponse} from '@store/types';
 import {CustomModal} from '@components/CustomModal';
+import {mapTypeToLabel} from '@utils/helpers/mapTypeToLabel';
+import {serviceItemsTypes} from '@constants/ServiceItemsTypes';
 
 export const ServicesList: FC<Props> = data => {
   const renderItem: SectionListRenderItem<
@@ -18,7 +20,7 @@ export const ServicesList: FC<Props> = data => {
   const renderHeader = ({section}: {section: ServiceCategory}) => {
     return (
       <CustomText style={styles.sectionHeader}>
-        {section.categoryTitle}
+        {mapTypeToLabel(section.categoryTitle, serviceItemsTypes)}
       </CustomText>
     );
   };

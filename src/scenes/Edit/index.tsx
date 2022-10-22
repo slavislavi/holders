@@ -61,7 +61,10 @@ export const Edit: FC = () => {
 
   const onSubmit: SubmitHandler<FormDataValues> = data => {
     dispatch(addNewServiceAction.request(addressAndDateToServiceData(data)));
-    console.log('===submit data===>  ', addressAndDateToServiceData(data)); // REMOVE
+    console.log(
+      '<scenes/Edit> onSubmit data: ',
+      addressAndDateToServiceData(data),
+    ); // REMOVE
     // reset();
   };
 

@@ -7,7 +7,7 @@ export interface GetServiceDataResponse {
   type: string;
   address: LatLng;
   description: string;
-  photo: string | null;
+  photo?: string;
 }
 
 export interface AddServiceParams {
@@ -16,18 +16,5 @@ export interface AddServiceParams {
   type: string;
   address: LatLng;
   description: string;
-  photo: string | null;
+  photo?: string;
 }
-
-export type ServiceTypeUnion =
-  | 'autoService'
-  | 'hotel'
-  | 'food'
-  | 'sports'
-  | 'finances'
-  | 'beauty'
-  | 'mall'
-  | 'store'
-  | 'education'
-  | 'pharmacy'
-  | 'others';

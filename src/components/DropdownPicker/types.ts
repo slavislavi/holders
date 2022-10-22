@@ -1,4 +1,3 @@
-import {ServiceTypeUnion} from '@store/types';
 import {FieldValues, UseControllerProps} from 'react-hook-form';
 
 export type DropdownPickerProps<T extends FieldValues> = {
@@ -8,5 +7,5 @@ export type DropdownPickerProps<T extends FieldValues> = {
 
 export type DropdownPickerItem = {
   label: string;
-  value: ServiceTypeUnion;
+  value: string;
 };
