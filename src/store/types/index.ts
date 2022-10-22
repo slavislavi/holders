@@ -18,3 +18,16 @@ export interface AddServiceParams {
   description: string;
   photo: string | null;
 }
+
+export type ServiceTypeUnion =
+  | 'autoService'
+  | 'hotel'
+  | 'food'
+  | 'sports'
+  | 'finances'
+  | 'beauty'
+  | 'mall'
+  | 'store'
+  | 'education'
+  | 'pharmacy'
+  | 'others';
