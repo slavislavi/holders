@@ -2,7 +2,6 @@ import React, {FC, useEffect, useState} from 'react';
 import {
   Dimensions,
   Keyboard,
-  ScrollView,
   Switch,
   Text,
   TextInput,
@@ -12,12 +11,15 @@ import {
 import {useForm, Controller, SubmitHandler} from 'react-hook-form';
 import {useDispatch} from 'react-redux';
 import MapView, {MapPressEvent, PROVIDER_GOOGLE} from 'react-native-maps';
+import {SafeAreaView} from 'react-native-safe-area-context';
 import {CustomText} from '@components/CustomText';
+import {DropdownPicker} from '@components/DropdownPicker';
 import {CustomImagePicker} from '@components/CustomImagePicker';
 import {TextValues} from '@constants/TextValues';
-import {AppIcons} from '@assets/images';
+import {serviceItemsTypes} from '@constants/ServiceItemsTypes';
 import {addNewServiceAction} from '@store/actions/manageService';
 import {addressAndDateToServiceData} from '@utils/helpers/addressAndDateToServiceData';
+import {AppIcons} from '@assets/images';
 import {THEME} from '@styles/theme';
 import {FormDataValues} from './types';
 import {styles} from './styles';
@@ -58,7 +60,7 @@ export const Edit: FC = () => {
 
   const onSubmit: SubmitHandler<FormDataValues> = data => {
     dispatch(addNewServiceAction.request(addressAndDateToServiceData(data)));
-    console.log('...submit data...'); // REMOVE
+    console.log('===submit data===>  ', addressAndDateToServiceData(data)); // REMOVE
     // reset();
   };
 
@@ -77,7 +79,7 @@ export const Edit: FC = () => {
   }, []);
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
+    <SafeAreaView style={styles.container}>
       {!isMap ? (
         <>
           {!keyboardStatus ? (
@@ -113,32 +115,11 @@ export const Edit: FC = () => {
             )}
           />
 
-          <Controller
+          <DropdownPicker
+            initialItems={serviceItemsTypes}
             control={control}
             name='type'
-            rules={{required: true, maxLength: 24}}
-            render={({field: {value, onChange, ref}, formState}) => (
-              <View style={styles.inputWrapper}>
-                <TextInput
-                  style={styles.input}
-                  autoCapitalize={'characters'}
-                  placeholder={TextValues.TypePlaceholder}
-                  value={value}
-                  onChangeText={onChange}
-                  ref={ref}
-                />
-                {formState.errors.type?.type === 'required' && (
-                  <Text style={styles.errorText}>
-                    {TextValues.TypeReqiuredInputErrTxt}
-                  </Text>
-                )}
-                {formState.errors.name?.type === 'maxLength' && (
-                  <Text style={styles.errorText}>
-                    {TextValues.TypeLengthInputErrTxt}
-                  </Text>
-                )}
-              </View>
-            )}
+            placeholder={TextValues.DropdownPlaceholder}
           />
 
           <View style={styles.inputAddressBox}>
@@ -192,26 +173,24 @@ export const Edit: FC = () => {
             />
           </View>
 
-          {!keyboardStatus ? (
-            <View style={styles.switherContainer}>
-              <Text style={styles.switcherLabel}>
-                {TextValues.MarkOnMapSwitcher}
-              </Text>
-              <Switch
-                trackColor={{false: THEME.INACTIVE, true: THEME.DANGER_HOVER}}
-                thumbColor={
-                  markOnMapSwitcher ? THEME.DANGER : THEME.PAGINATOR_DOT
-                }
-                onValueChange={toggleSwitch}
-                value={markOnMapSwitcher}
-              />
-              {markOnMapSwitcher ? (
-                <TouchableOpacity onPress={showMap} style={styles.mapButton}>
-                  <AppIcons.EarthIcon width={40} height={40} />
-                </TouchableOpacity>
-              ) : null}
-            </View>
-          ) : null}
+          <View style={styles.switherContainer}>
+            <Text style={styles.switcherLabel}>
+              {TextValues.MarkOnMapSwitcher}
+            </Text>
+            <Switch
+              trackColor={{false: THEME.INACTIVE, true: THEME.DANGER_HOVER}}
+              thumbColor={
+                markOnMapSwitcher ? THEME.DANGER : THEME.PAGINATOR_DOT
+              }
+              onValueChange={toggleSwitch}
+              value={markOnMapSwitcher}
+            />
+            {markOnMapSwitcher ? (
+              <TouchableOpacity onPress={showMap} style={styles.mapButton}>
+                <AppIcons.EarthIcon width={40} height={40} />
+              </TouchableOpacity>
+            ) : null}
+          </View>
 
           <Controller
             control={control}
@@ -263,6 +242,6 @@ export const Edit: FC = () => {
           }}
         />
       )}
-    </ScrollView>
+    </SafeAreaView>
   );
 };

@@ -1,4 +1,6 @@
+import {serviceItemsTypes} from '@constants/ServiceItemsTypes';
 import {GetServiceDataResponse} from '@store/types';
+import {mapTypeToLabel} from './mapTypeToLabel';
 
 export type ServiceCategory = {
   categoryTitle: string;
@@ -13,7 +15,10 @@ export const mapDataFromDb = (data: GetServiceDataResponse[]) => {
     if (index >= 0) {
       arr[index].data.push(item);
     } else {
-      arr.push({categoryTitle: item.type, data: [item]});
+      arr.push({
+        categoryTitle: mapTypeToLabel(item.type, serviceItemsTypes),
+        data: [item],
+      });
     }
     return arr;
   }, [] as ServiceCategory[]);

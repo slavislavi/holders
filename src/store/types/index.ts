@@ -16,5 +16,5 @@ export interface AddServiceParams {
   type: string;
   address: LatLng;
   description: string;
-  photo: string | undefined;
+  photo: string | null;
 }

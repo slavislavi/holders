@@ -15,32 +15,31 @@ export class ManageServiceService {
         ...(doc.data() as Omit<GetServiceDataResponse, 'id'>),
       }),
     );
-
     return services;
   }
 
   static async addServiceToDb(data: AddServiceParams) {
-    if (data.photo) {
+    if (data.photo != null) {
       const fileName = data.photo;
-      console.log('===fileName получаю на сабмите: ', fileName); // TO REMOVE
+      console.log('<addServiceToDb> submit fileName: ', fileName); // TO REMOVE
 
       const pathToFile = `${utils.FilePath.PICTURES_DIRECTORY}/${fileName}`;
-      console.log('===pathToFile получаю на сабмите: ', pathToFile); // TO REMOVE
+      console.log('<addServiceToDb> submit pathToFile: ', pathToFile); // TO REMOVE
 
-      await storage().ref(fileName).putFile(pathToFile);
+      await storage().ref(fileName).putFile(pathToFile); // Вероятно проблема здесь
 
       const url = await storage().ref(fileName).getDownloadURL();
-      console.log('===урл получаю на сабмите: ', url); // TO REMOVE
+      console.log('<addServiceToDb> submit url: ', url); // TO REMOVE
 
       const response = await firestore()
         .collection('services')
         .add({...data, photo: url});
-      console.log('Что записываю в firestore: ', response); // TO REMOVE
+      console.log('<addServiceToDb> response: ', response); // TO REMOVE
 
       return response;
     } else {
       const response = await firestore().collection('services').add(data);
-      console.log('addServiceToDb сработал без data.photo: ', response); // TO REMOVE
+      console.log('<addServiceToDb> response without PHOTO: ', response); // TO REMOVE
 
       return response;
     }

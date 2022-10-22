@@ -6,12 +6,12 @@ export const addressAndDateToServiceData = ({
   ...rest
 }: FormDataValues) => {
   console.log(
-    '...helper fired... photo: ',
+    '...helper fired with photo: ',
     JSON.stringify(photo).split('/').pop(),
   );
   return {
     address: {latitude: +address.latitude, longitude: +address.longitude},
-    photo: photo?.assets && JSON.stringify(photo).split('/').pop(),
+    photo: JSON.stringify(photo).split('/').pop() || null,
     date: new Date().toISOString(),
     ...rest,
   };

@@ -12,6 +12,7 @@ export const THEME = {
 
   BORDER: '#4896fa',
   PAGINATOR_DOT: '#027b96',
+  DROPDOWN: '#76cbe5',
   INACTIVE: '#027b9640',
   HEADER_BG: '#016278',
   HEADER_TEXT: '#efeeef',

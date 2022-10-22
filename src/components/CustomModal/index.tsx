@@ -2,6 +2,8 @@ import React, {FC, useEffect, useState} from 'react';
 import {Image, Modal, Pressable, Text, View} from 'react-native';
 // import storage from '@react-native-firebase/storage';
 import {TextValues} from '@constants/TextValues';
+import {serviceItemsTypes} from '@constants/ServiceItemsTypes';
+import {mapTypeToLabel} from '@utils/helpers/mapTypeToLabel';
 import {AppImages} from '@assets/images';
 import {ModalProps} from './types';
 import {styles} from './styles';
@@ -35,7 +37,9 @@ export const CustomModal: FC<ModalProps> = ({data}) => {
               </Text>
             </Pressable>
             <Text style={styles.nameText}>{data.name}</Text>
-            <Text style={styles.typeText}>{data.type}</Text>
+            <Text style={styles.typeText}>
+              {mapTypeToLabel(data.type, serviceItemsTypes)}
+            </Text>
             {data.photo ? (
               <Image style={styles.modalImage} source={{uri: imageURL}} />
             ) : (
