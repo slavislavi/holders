@@ -2,6 +2,7 @@ import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
 import {utils} from '@react-native-firebase/app';
 import {AddServiceParams, GetServiceDataResponse} from '@store/types';
+import {Platform} from 'react-native';
 
 export class ManageServiceService {
   static async getServicesFromDb() {
@@ -26,9 +27,17 @@ export class ManageServiceService {
       console.log('<addServiceToDb> submit fileName: ', fileName); // TO REMOVE
 
       const pathToFile = `${utils.FilePath.PICTURES_DIRECTORY}/${fileName}`;
+      const uploadPathToFile =
+        Platform.OS === 'ios' ? pathToFile.replace('file://', '') : pathToFile;
       console.log('<addServiceToDb> submit pathToFile: ', pathToFile); // TO REMOVE
 
-      await storage().ref(fileName).putFile(pathToFile); // Вероятно проблема здесь
+      try {
+        console.log('STARTED');
+        await storage().ref(fileName).putFile(uploadPathToFile); // Вероятно проблема здесь
+        console.log('FINiSHED');
+      } catch (e) {
+        console.log('<addServiceToDb> ERR: ', e);
+      }
 
       const url = await storage().ref(fileName).getDownloadURL();
       console.log('<addServiceToDb> submit url: ', url); // TO REMOVE

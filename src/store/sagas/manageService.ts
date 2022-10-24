@@ -29,6 +29,7 @@ export class ManageServicesSagaWorker {
       console.log('<SAGA> addNewService SAGA: ', response); // TO REMOVE
       yield put(addNewServiceAction.success({...payload, id: response.id}));
     } catch (error: any) {
+      console.log('<SAGA> addNew SAGA with Error: ', error); // TO REMOVE
       yield put(addNewServiceAction.failure(error));
     }
   }

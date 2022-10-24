@@ -7,11 +7,11 @@ export const addressAndDateToServiceData = ({
 }: FormDataValues) => {
   console.log(
     '<helper/addressAndDateToServiceData> fired with photo: ',
-    JSON.stringify(photo).split('/').pop(),
+    JSON.stringify(photo).replace(/['"]+/g, '').split('/').pop(),
   );
   return {
     address: {latitude: +address.latitude, longitude: +address.longitude},
-    photo: photo && JSON.stringify(photo).split('/').pop(),
+    photo: JSON.stringify(photo).replace(/['"]+/g, '').split('/').pop(),
     date: new Date().toISOString(),
     ...rest,
   };
