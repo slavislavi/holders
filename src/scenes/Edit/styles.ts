@@ -31,14 +31,16 @@ export const styles = StyleSheet.create({
   submitButton: {
     backgroundColor: THEME.DANGER,
     borderRadius: 5,
+    minWidth: 225,
     height: 50,
     justifyContent: 'center',
   },
   submitButtonText: {
     color: THEME.SECONDARY,
-    fontSize: 36,
+    fontSize: 28,
     textTransform: 'uppercase',
     paddingHorizontal: 36,
+    textAlign: 'center',
   },
   switherContainer: {
     flexDirection: 'row',

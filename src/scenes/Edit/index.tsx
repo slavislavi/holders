@@ -10,7 +10,7 @@ import {
   View,
 } from 'react-native';
 import {useForm, Controller, SubmitHandler} from 'react-hook-form';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import MapView, {MapPressEvent, PROVIDER_GOOGLE} from 'react-native-maps';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {CustomText} from '@components/CustomText';
@@ -19,6 +19,7 @@ import {CustomImagePicker} from '@components/CustomImagePicker';
 import {TextValues} from '@constants/TextValues';
 import {serviceItemsTypes} from '@constants/ServiceItemsTypes';
 import {addNewServiceAction} from '@store/actions/manageService';
+import {isLoadingSelector} from '@store/selectors/manageService';
 import {addressAndDateToServiceData} from '@utils/helpers/addressAndDateToServiceData';
 import {AppIcons} from '@assets/images';
 import {THEME} from '@styles/theme';
@@ -31,8 +32,9 @@ export const Edit: FC = () => {
   const [markOnMapSwitcher, setMarkOnMapSwitcher] = useState(false);
   const [keyboardStatus, setKeyboardStatus] = useState(false);
   const [isMap, setIsMap] = useState(false);
+  const loadingFromDb = useSelector(isLoadingSelector);
 
-  const {control, handleSubmit, setValue} = useForm({
+  const {control, handleSubmit, setValue, reset} = useForm({
     defaultValues: {
       name: '',
       type: '',
@@ -61,11 +63,7 @@ export const Edit: FC = () => {
 
   const onSubmit: SubmitHandler<FormDataValues> = data => {
     dispatch(addNewServiceAction.request(addressAndDateToServiceData(data)));
-    console.log(
-      '<scenes/Edit> onSubmit data: ',
-      addressAndDateToServiceData(data),
-    ); // REMOVE
-    // reset();
+    reset();
   };
 
   useEffect(() => {
@@ -227,9 +225,12 @@ export const Edit: FC = () => {
             {!keyboardStatus ? (
               <TouchableOpacity
                 style={styles.submitButton}
+                disabled={loadingFromDb}
                 onPress={handleSubmit(onSubmit)}>
                 <CustomText style={styles.submitButtonText}>
-                  {TextValues.AddNewServiceButtonText}
+                  {loadingFromDb
+                    ? TextValues.Onloading
+                    : TextValues.AddNewServiceButtonText}
                 </CustomText>
               </TouchableOpacity>
             ) : null}

@@ -39,4 +39,7 @@ export const TextValues = {
   DropdownLabelBeauty: 'Hairdressers & Beauty',
   DropdownLabelEdu: 'Education',
   DropdownLabelOthers: 'Others',
+
+  SuccessfullyUpload: 'New Service has been successfully uploaded',
+  Onloading: 'Loading',
 };

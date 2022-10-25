@@ -1,3 +1,4 @@
+import {TextValues} from '@constants/TextValues';
 import {ActionType} from 'typesafe-actions';
 import {takeLatest, call, put} from '@redux-saga/core/effects';
 import {
@@ -7,6 +8,7 @@ import {
 import {GetServiceDataResponse} from '@store/types';
 import {ManageServiceService} from '@services/manageServiceService';
 import {FirebaseFirestoreTypes} from '@react-native-firebase/firestore';
+import {Alert} from 'react-native';
 
 export class ManageServicesSagaWorker {
   static *getServicesData() {
@@ -26,10 +28,9 @@ export class ManageServicesSagaWorker {
     try {
       const response: FirebaseFirestoreTypes.DocumentReference<FirebaseFirestoreTypes.DocumentData> =
         yield call(ManageServiceService.addServiceToDb, payload);
-      console.log('<SAGA> addNewService SAGA: ', response); // TO REMOVE
       yield put(addNewServiceAction.success({...payload, id: response.id}));
+      yield call(Alert.alert, TextValues.SuccessfullyUpload);
     } catch (error: any) {
-      console.log('<SAGA> addNew SAGA with Error: ', error); // TO REMOVE
       yield put(addNewServiceAction.failure(error));
     }
   }
