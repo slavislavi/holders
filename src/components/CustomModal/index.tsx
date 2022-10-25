@@ -1,6 +1,5 @@
 import React, {FC, useEffect, useState} from 'react';
 import {Image, Modal, Pressable, Text, View} from 'react-native';
-// import storage from '@react-native-firebase/storage';
 import {TextValues} from '@constants/TextValues';
 import {serviceItemsTypes} from '@constants/ServiceItemsTypes';
 import {mapTypeToLabel} from '@utils/helpers/mapTypeToLabel';
@@ -11,16 +10,6 @@ import {styles} from './styles';
 export const CustomModal: FC<ModalProps> = ({data}) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [imageURL, setImageURL] = useState('');
-
-  // ======> вытягивает картинки, загруженные напрямую в firebase, удалить когда починю загрузку фото
-  // useEffect(() => {
-  //   const fileName = data.photo?.split('/').pop();
-  //   storage()
-  //     .ref(`/images/${fileName}`)
-  //     .getDownloadURL()
-  //     .then(url => setImageURL(url))
-  //     .catch(error => console.log('Errors while downloading => ', error));
-  // }, [data.photo]);
 
   useEffect(() => {
     data.photo && setImageURL(data.photo);
