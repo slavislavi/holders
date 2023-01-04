@@ -7,7 +7,10 @@ module.exports = {
     {
       files: ['*.ts', '*.tsx'],
       rules: {
+        'react-hooks/exhaustive-deps': 'off',
         '@typescript-eslint/no-shadow': ['error'],
+        'prettier/prettier': ['error', {singleQuote: true}],
+        'jsx-quotes': [2, 'prefer-single'],
         'no-shadow': 'off',
         'no-undef': 'off',
       },

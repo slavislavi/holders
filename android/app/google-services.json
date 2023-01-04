@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "816467713167",
+    "project_id": "holders-d6c34",
+    "storage_bucket": "holders-d6c34.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:816467713167:android:bada1ef56f555b1c6524fa",
+        "android_client_info": {
+          "package_name": "com.holders"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "816467713167-1mj9sefuiq2eqnalctebpagvqfim6r94.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5u44CslER6NyJC0khBZWve0-tDwrR66Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "816467713167-1mj9sefuiq2eqnalctebpagvqfim6r94.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
